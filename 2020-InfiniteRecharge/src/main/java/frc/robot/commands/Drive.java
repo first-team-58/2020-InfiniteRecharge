@@ -7,22 +7,23 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drivetrain;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class ExampleCommand extends CommandBase {
+public class Drive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ExampleSubsystem m_subsystem;
+  private final Drivetrain m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(ExampleSubsystem subsystem) {
+  public Drive(Drivetrain subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -36,7 +37,20 @@ public class ExampleCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Execute");
+      double moveValue = RobotContainer.m_driverController.getRawAxis(1);
+      double rotateValue = RobotContainer.m_driverController.getRawAxis(4);
+
+      if(Math.abs(moveValue) < .2) {
+          moveValue = 0;
+      }
+
+      if(Math.abs(rotateValue) < .2) {
+          rotateValue = 0;
+      }
+
+      System.out.println("Move: " + moveValue + " Rotate: " + rotateValue);
+
+      m_subsystem.drive(moveValue, rotateValue);
   }
 
   // Called once the command ends or is interrupted.
