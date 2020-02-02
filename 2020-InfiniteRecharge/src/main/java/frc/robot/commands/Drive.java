@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 
@@ -44,10 +45,22 @@ public class Drive extends CommandBase {
           moveValue = 0;
       }
 
+      if(m_subsystem.getSlowSpeed()) {
+        moveValue = .5*moveValue;
+      }
+
       if(Math.abs(rotateValue) < .2) {
           rotateValue = 0;
       }
 
+      //rotateValue = rotateValue * ((-.5 * (((m_subsystem.getSpeed()/20000)) * (m_subsystem.getSpeed()/20000))) + 1);
+      rotateValue = rotateValue * (((-.5 * ((m_subsystem.getSpeed()/20000))) + 1));
+
+      //-.5x^2 + 1 to reduce steering sensitivity with speed = x
+      SmartDashboard.putNumber("Speed", m_subsystem.getSpeed());
+      SmartDashboard.putBoolean("Slow Speed", m_subsystem.getSlowSpeed());
+      //SmartDashboard.putNumber("rotate Modifier", ((-.5 * (((m_subsystem.getSpeed()/20000)) * (m_subsystem.getSpeed()/20000))) + 1));
+      SmartDashboard.putNumber("rotate Modifier", (((-.5 * ((m_subsystem.getSpeed()/20000)))) + 1));
       System.out.println("Move: " + moveValue + " Rotate: " + rotateValue);
 
       m_subsystem.drive(moveValue, rotateValue);

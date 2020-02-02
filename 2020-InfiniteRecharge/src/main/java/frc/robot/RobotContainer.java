@@ -42,10 +42,11 @@ public class RobotContainer {
 // Controller stuff
   public static final XboxController m_driverController = new XboxController(0);
 
-  private static final JoystickButton m_driverAButton = new JoystickButton(m_driverController, 0);
-  private static final JoystickButton m_driverBButton = new JoystickButton(m_driverController, 1);
-  private static final JoystickButton m_driverXButton = new JoystickButton(m_driverController, 2);
-  private static final JoystickButton m_driverYButton = new JoystickButton(m_driverController, 3);
+  private static final JoystickButton m_driverAButton = new JoystickButton(m_driverController, 1);
+  private static final JoystickButton m_driverBButton = new JoystickButton(m_driverController, 2);
+  private static final JoystickButton m_driverXButton = new JoystickButton(m_driverController, 3);
+  private static final JoystickButton m_driverYButton = new JoystickButton(m_driverController, 4);
+  private static final JoystickButton m_driverLSButton = new JoystickButton(m_driverController, 9);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -63,6 +64,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_driverAButton.whenPressed(new ToggleCollectorPosition(m_collector));
+    m_driverLSButton.whenPressed(new ToggleSlowSpeed(m_drivetrain));
   }
 
 
