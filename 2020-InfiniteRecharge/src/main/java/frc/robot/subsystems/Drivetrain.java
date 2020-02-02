@@ -9,28 +9,30 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
-    private WPI_TalonSRX leftFrontMotor, rightFrontMotor;
-    private WPI_VictorSPX leftRearMotor, rightRearMotor;
+    private WPI_TalonFX driveTrainLeftFront, driveTrainRightFront;
+    private WPI_TalonFX driveTrainLeftRear, driveTrainRightRear;
     
     private DifferentialDrive drive;
   /**
    * Creates a new Drivetrain.
    */
   public Drivetrain() {
-    leftFrontMotor = new WPI_TalonSRX(4);
-    rightFrontMotor = new WPI_TalonSRX(2);
-    leftRearMotor = new WPI_VictorSPX(5);
-    rightRearMotor = new WPI_VictorSPX(3);
+    driveTrainRightFront = new WPI_TalonFX(1);
+    driveTrainRightRear = new WPI_TalonFX(2);
+    driveTrainLeftFront = new WPI_TalonFX(3);
+    driveTrainLeftRear = new WPI_TalonFX(4);
+    
 
-    leftFrontMotor.follow(leftRearMotor);
-    rightFrontMotor.follow(rightRearMotor);
+    driveTrainLeftFront.follow(driveTrainLeftRear);
+    driveTrainRightFront.follow(driveTrainRightRear);
 
-    drive = new DifferentialDrive(leftRearMotor, rightRearMotor);
+    drive = new DifferentialDrive(driveTrainLeftRear, driveTrainRightRear);
   }
 
   @Override
