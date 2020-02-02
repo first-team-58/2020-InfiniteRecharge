@@ -7,11 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-//import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -27,7 +24,6 @@ public class Drivetrain extends SubsystemBase {
     driveTrainRightRear = new WPI_TalonFX(2);
     driveTrainLeftFront = new WPI_TalonFX(3);
     driveTrainLeftRear = new WPI_TalonFX(4);
-    
 
     driveTrainLeftFront.follow(driveTrainLeftRear);
     driveTrainRightFront.follow(driveTrainRightRear);
