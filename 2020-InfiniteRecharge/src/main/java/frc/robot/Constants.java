@@ -42,4 +42,8 @@ public final class Constants {
     public static double intakeSpeed = 1.0;
     public static Value intakeUpPosition = Value.kReverse;
     public static Value intakeDownPosition = Value.kForward;
+
+    //Intake Constants
+    public static double indexerInSpeed = 1.0;
+    public static double indexerOutSpeed = -1.0;
 }
