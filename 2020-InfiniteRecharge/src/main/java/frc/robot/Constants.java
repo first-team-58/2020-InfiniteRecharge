@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -35,4 +37,9 @@ public final class Constants {
     public static int wheelOfFortuneSolenoid2 = 4;
     public static int hangerSolenoid1 = 5;
     public static int hangerSolenoid2 = 6;
+
+    //Collector Constants
+    public static double intakeSpeed = 1.0;
+    public static Value intakeUpPosition = Value.kReverse;
+    public static Value intakeDownPosition = Value.kForward;
 }

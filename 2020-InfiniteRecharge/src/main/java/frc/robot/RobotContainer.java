@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.*;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -63,7 +62,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_driverAButton.whenPressed(new ToggleCollectorPosition(m_collector));
+    m_driverAButton.whenPressed(new CollectorDeploy(m_collector));
+    m_driverAButton.whenReleased(new CollectorRetract(m_collector));
     m_driverLSButton.whenPressed(new ToggleSlowSpeed(m_drivetrain));
   }
 
