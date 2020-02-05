@@ -39,7 +39,8 @@ public final class Constants {
     public static int hangerSolenoid2 = 6;
 
     //Collector Constants
-    public static double intakeSpeed = 1.0;
+    public static double intakeInSpeed = 1.0;
+    public static double intakeOutSpeed = -1.0;
     public static Value intakeUpPosition = Value.kReverse;
     public static Value intakeDownPosition = Value.kForward;
 
@@ -51,4 +52,10 @@ public final class Constants {
     public static double hangerUpSpeed = 1.0;
     public static double hangerDownSpeed = -1.0;
     public static Value hangerReleaseState = Value.kForward;
+
+    //WheelOfFortune Constants
+    public static double wOFCCW = 1.0;
+    public static double wOFCW = -1.0;
+    public static Value wOFDeployedState = Value.kForward;
+    public static Value wOFRetractedState = Value.kReverse;
 }

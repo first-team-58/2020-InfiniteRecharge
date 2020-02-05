@@ -34,7 +34,7 @@ public class CollectorOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.setMotor(-1.0 * Constants.intakeSpeed);
+      m_subsystem.setMotor(Constants.intakeOutSpeed);
   }
 
   // Called once the command ends or is interrupted.

@@ -34,7 +34,7 @@ public class CollectorIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.setMotor(Constants.intakeSpeed);
+      m_subsystem.setMotor(Constants.intakeInSpeed);
   }
 
   // Called once the command ends or is interrupted.
