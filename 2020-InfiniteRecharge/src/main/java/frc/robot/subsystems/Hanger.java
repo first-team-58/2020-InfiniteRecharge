@@ -9,16 +9,19 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 
 public class Hanger extends SubsystemBase {
   private DoubleSolenoid solenoid;
+  private WPI_TalonSRX motor;
 
   /**
    * Creates a new Collector.
    */
   public Hanger() {
     solenoid = new DoubleSolenoid(Constants.hangerSolenoid1, Constants.hangerSolenoid2);
+    motor = new WPI_TalonSRX(Constants.hangerMotor);
   }
 
   @Override
@@ -28,6 +31,10 @@ public class Hanger extends SubsystemBase {
 
   public void setSolenoidState(DoubleSolenoid.Value value) {
       solenoid.set(value);
+  }
+
+  public void setMotor(double speed) {
+    motor.set(speed);
   }
 
 }

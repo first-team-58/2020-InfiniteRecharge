@@ -46,4 +46,9 @@ public final class Constants {
     //Intake Constants
     public static double indexerInSpeed = 1.0;
     public static double indexerOutSpeed = -1.0;
+
+    //Hanger Constants
+    public static double hangerUpSpeed = 1.0;
+    public static double hangerDownSpeed = -1.0;
+    public static Value hangerReleaseState = Value.kForward;
 }
