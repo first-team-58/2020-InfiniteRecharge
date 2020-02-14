@@ -58,4 +58,13 @@ public final class Constants {
     public static double wOFCW = -1.0;
     public static Value wOFDeployedState = Value.kForward;
     public static Value wOFRetractedState = Value.kReverse;
+
+    //shooter Constants
+    public static double shooter_kF = 0;
+    public static double shooter_kP = 0;
+    public static double shooter_kI = 0;
+    public static double shooter_kD = 0;
+    public static double shooter_speedTarget = 1; //needs to be set in units / 100ms, so 500 rpm would be 500.0 * 4960 (encoder ticks per revolution) / 600
+
+    
 }

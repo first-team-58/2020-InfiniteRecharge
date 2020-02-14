@@ -23,20 +23,20 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
   // Robots subsystems are defined here
-  private final Drivetrain m_drivetrain = new Drivetrain();
+  public static final Drivetrain m_drivetrain = new Drivetrain();
 
-  private final Collector m_collector = new Collector();
+  public static final Collector m_collector = new Collector();
 
-  private final Hanger m_hanger = new Hanger();
+  public static final Hanger m_hanger = new Hanger();
 
-  private final Indexer m_indexer = new Indexer();
+  public static final Indexer m_indexer = new Indexer();
 
-  private final Shooter m_shooter = new Shooter();
+  public static final Shooter m_shooter = new Shooter();
 
-  private final WheelOfFortune m_wheelOfFortune = new WheelOfFortune();
+  public static final WheelOfFortune m_wheelOfFortune = new WheelOfFortune();
 
   // Robots commands are defined here
-  private final Drive m_drive = new Drive(m_drivetrain);
+  public final Drive m_drive = new Drive(m_drivetrain);
 
 // Controller stuff
   public static final XboxController m_driverController = new XboxController(0);
