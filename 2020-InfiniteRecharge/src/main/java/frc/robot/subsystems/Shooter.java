@@ -16,11 +16,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
   private WPI_TalonSRX motor;
+  private WPI_TalonSRX motor2;
   /**
    * Creates a new Collector.
    */
   public Shooter() {
     motor = new WPI_TalonSRX(Constants.shooterMotor);
+    motor2 = new WPI_TalonSRX(Constants.rightShooter);
+    motor2.follow(motor);
     motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     motor.setSensorPhase(true);
     motor.configNominalOutputForward(0);

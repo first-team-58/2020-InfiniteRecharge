@@ -14,12 +14,15 @@ import frc.robot.Constants;
 
 public class Indexer extends SubsystemBase {
   private WPI_TalonSRX motor;
+  private WPI_TalonSRX motor2;
 
   /**
    * Creates a new Indexer.
    */
   public Indexer() {
     motor = new WPI_TalonSRX(Constants.indexerMotor);
+  motor2 = new WPI_TalonSRX(Constants.topIndexer);
+  motor2.follow(motor);
   }
 
   @Override

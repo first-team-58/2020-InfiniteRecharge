@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,7 +18,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
     private WPI_TalonFX driveTrainLeftFront, driveTrainRightFront;
     private WPI_TalonFX driveTrainLeftRear, driveTrainRightRear;
-    
+    private Solenoid driveSolenoid;
+
     private DifferentialDrive drive;
 
     private boolean slowSpeed = false;
@@ -29,10 +32,13 @@ public class Drivetrain extends SubsystemBase {
     driveTrainLeftFront = new WPI_TalonFX(Constants.driveTrainLeftFront);
     driveTrainLeftRear = new WPI_TalonFX(Constants.driveTrainLeftRear);
 
+    driveSolenoid = new Solenoid(Constants.driveTrainSolenoid);
+
     driveTrainLeftFront.follow(driveTrainLeftRear);
     driveTrainRightFront.follow(driveTrainRightRear);
 
     drive = new DifferentialDrive(driveTrainLeftRear, driveTrainRightRear);
+    driveSolenoid.set(Constants.driveSolenoidSlow);
   }
 
   @Override
@@ -45,7 +51,9 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void toggleSlowSpeed() {
-    slowSpeed = !slowSpeed;
+    //slowSpeed = !slowSpeed;
+    driveSolenoid.set(!driveSolenoid.get());
+
   }
 
   public boolean getSlowSpeed() {

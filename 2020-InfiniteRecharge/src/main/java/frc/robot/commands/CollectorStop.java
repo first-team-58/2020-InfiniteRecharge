@@ -22,7 +22,7 @@ public class CollectorStop extends CommandBase {
   public CollectorStop(Collector subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    //addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -44,6 +44,6 @@ public class CollectorStop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

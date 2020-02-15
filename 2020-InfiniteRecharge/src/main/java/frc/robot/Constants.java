@@ -28,25 +28,34 @@ public final class Constants {
     public static int wheelOfFortuneMotor = 7;
     public static int indexerMotor = 8;
     public static int hangerMotor = 9;
+    public static int topIndexer = 10;
+    public static int rightShooter = 11;
 
     //solenoid ports
     public static int driveTrainSolenoid = 0;
     public static int collectorSolenoid1 = 1;
     public static int collectorSolenoid2 = 2;
-    public static int wheelOfFortuneSolenoid1 = 3;
-    public static int wheelOfFortuneSolenoid2 = 4;
-    public static int hangerSolenoid1 = 5;
-    public static int hangerSolenoid2 = 6;
+    public static int wheelOfFortuneSolenoid1 = 5;
+    //public static int wheelOfFortuneSolenoid2 = 4;
+    public static int hangerSolenoid1 = 3;
+    public static int hangerSolenoid2 = 4;
+    public static int hangerBreak = 6;
+
+    //DIO PORTS
+    public static int intakeSensor = 0;
+    public static int indexerSensor1 = 1;
+    public static int indexerSensor2 = 2;
 
     //Collector Constants
-    public static double intakeInSpeed = 1.0;
+    public static double intakeInSpeed = 0.4;
     public static double intakeOutSpeed = -1.0;
-    public static Value intakeUpPosition = Value.kReverse;
-    public static Value intakeDownPosition = Value.kForward;
+    public static Value intakeUpPosition = Value.kOff;
+    public static Value intakeDownPosition = Value.kReverse;
+    public static Value intakeOffPosition = Value.kForward;
 
     //Intake Constants
-    public static double indexerInSpeed = 1.0;
-    public static double indexerOutSpeed = -1.0;
+    public static double indexerInSpeed = 0.2;
+    public static double indexerOutSpeed = -0.3;
 
     //Hanger Constants
     public static double hangerUpSpeed = 1.0;
@@ -66,5 +75,6 @@ public final class Constants {
     public static double shooter_kD = 0;
     public static double shooter_speedTarget = 1; //needs to be set in units / 100ms, so 500 rpm would be 500.0 * 4960 (encoder ticks per revolution) / 600
 
-    
+    //drive Constants
+    public static boolean driveSolenoidSlow = true;
 }

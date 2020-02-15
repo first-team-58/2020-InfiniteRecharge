@@ -23,7 +23,7 @@ public class CollectorOut extends CommandBase {
   public CollectorOut(Collector subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    //addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.

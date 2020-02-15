@@ -23,7 +23,7 @@ public class CollectorIn extends CommandBase {
   public CollectorIn(Collector subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    //addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -35,7 +35,7 @@ public class CollectorIn extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.setMotor(Constants.intakeInSpeed);
-  }
+    }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -45,6 +45,6 @@ public class CollectorIn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

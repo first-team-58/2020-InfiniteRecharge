@@ -7,24 +7,22 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Shooter;
 /**
  * An example command that uses an example subsystem.
  */
-public class CollectorDown extends CommandBase {
-  Collector m_subsystem;
+public class ShooterSpin extends CommandBase {
+  Shooter m_subsystem;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public CollectorDown(Collector subsystem) {
+  public ShooterSpin(Shooter subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    //addRequirements(subsystem);
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -35,15 +33,7 @@ public class CollectorDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   // System.out.println("test");
-    //if(m_subsystem.getSolenoidState().equals(Constants.intakeDownPosition)) {
-    //  m_subsystem.setSolenoidState(Constants.intakeOffPosition);
-    //} else {
-      m_subsystem.setSolenoidState(Constants.intakeDownPosition);
-    //}
-        
-
-        
+      m_subsystem.setMotor(.8);
   }
 
   // Called once the command ends or is interrupted.
@@ -54,6 +44,6 @@ public class CollectorDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
