@@ -36,10 +36,10 @@ public class CollectorDown extends CommandBase {
   @Override
   public void execute() {
    // System.out.println("test");
-    //if(m_subsystem.getSolenoidState().equals(Constants.intakeDownPosition)) {
-    //  m_subsystem.setSolenoidState(Constants.intakeOffPosition);
+    //if(m_subsystem.getSolenoidState().equals(Constants.collectorDownPosition)) {
+    //  m_subsystem.setSolenoidState(Constants.collectorOffPosition);
     //} else {
-      m_subsystem.setSolenoidState(Constants.intakeDownPosition);
+      m_subsystem.setSolenoidState(Constants.collectorDownPosition);
     //}
         
 

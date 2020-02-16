@@ -30,7 +30,7 @@ public class CollectorUp extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-       m_subsystem.setSolenoidState(Constants.intakeUpPosition);
+       m_subsystem.setSolenoidState(Constants.collectorUpPosition);
     }
 
   // Called once the command ends or is interrupted.

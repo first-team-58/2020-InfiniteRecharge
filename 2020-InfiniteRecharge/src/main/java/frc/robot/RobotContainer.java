@@ -74,9 +74,9 @@ public class RobotContainer {
     m_driverAButton.whenReleased(new CollectorRetract(m_collector));
     m_driverRBButton.whenPressed(new ShooterSpin(m_shooter));
     m_driverRBButton.whenReleased(new ShooterStop(m_shooter));
-    m_driverBButton.whenPressed(new IndexerOut(m_indexer));
+    m_driverBButton.whenPressed(new IndexerIn(m_indexer));
     m_driverBButton.whenReleased(new IndexerStop(m_indexer));
-    m_driverXButton.whenPressed(new IndexerIn(m_indexer));
+    m_driverXButton.whenPressed(new IndexerOut(m_indexer));
     m_driverXButton.whenReleased(new IndexerStop(m_indexer));
     //m_driverAButton.whenReleased(new CollectorRetract(m_collector));
     m_driverLSButton.toggleWhenPressed(new ToggleSlowSpeed(m_drivetrain));

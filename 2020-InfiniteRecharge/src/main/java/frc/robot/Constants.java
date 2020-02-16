@@ -42,20 +42,20 @@ public final class Constants {
     public static int hangerBreak = 6;
 
     //DIO PORTS
-    public static int intakeSensor = 0;
+    public static int collectorSensor = 0;
     public static int indexerSensor1 = 1;
     public static int indexerSensor2 = 2;
 
     //Collector Constants
-    public static double intakeInSpeed = 0.4;
-    public static double intakeOutSpeed = -1.0;
-    public static Value intakeUpPosition = Value.kOff;
-    public static Value intakeDownPosition = Value.kReverse;
-    public static Value intakeOffPosition = Value.kForward;
+    public static double collectorInSpeed = 0.4;
+    public static double collectorOutSpeed = -1.0;
+    public static Value collectorUpPosition = Value.kOff;
+    public static Value collectorDownPosition = Value.kReverse;
+    public static Value collectorOffPosition = Value.kForward;
 
-    //Intake Constants
-    public static double indexerInSpeed = 0.2;
-    public static double indexerOutSpeed = -0.3;
+    //collector Constants
+    public static double indexerInSpeed = -0.3;
+    public static double indexerOutSpeed = 0.2;
 
     //Hanger Constants
     public static double hangerUpSpeed = 1.0;
