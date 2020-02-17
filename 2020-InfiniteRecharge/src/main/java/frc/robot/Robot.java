@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -61,6 +62,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Shooter PID Error", RobotContainer.m_shooter.getRightMotorPIDError());
     SmartDashboard.putNumber("Left Shooter Raw Speed", RobotContainer.m_shooter.getLeftRawSpeed());
     SmartDashboard.putNumber("Right Shooter Raw Speed", RobotContainer.m_shooter.getRightRawSpeed());
+    //Number[] lime = NetworkTableInstance.getDefault().getEntry("camtran")
+    SmartDashboard.putNumber("Limelight camtran x", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[0]);
+    SmartDashboard.putNumber("Limelight camtran y", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[1]);
+    SmartDashboard.putNumber("Limelight camtran z", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[2]);
+
   }
 
   /**
@@ -103,7 +109,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    Limelight.setLimelightLeds(1);
+    Limelight.setLimelightLeds(0);
   }
 
   /**

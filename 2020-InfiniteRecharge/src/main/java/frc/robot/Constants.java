@@ -78,6 +78,7 @@ public final class Constants {
     public static double shooterR_kP = 0.004; //.025;
     public static double shooterR_kI = 0.001; //.0001;
     public static double shooterR_kD = 0;//2; //2;
+    
     public static double shooter_speedTarget = 1; //needs to be set in units / 100ms, so 500 rpm would be 500.0 * 4960 (encoder ticks per revolution) / 600
 
     //drive Constants
