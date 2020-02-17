@@ -47,7 +47,7 @@ public final class Constants {
     public static int indexerTopSensor = 2;
 
     //Collector Constants
-    public static double collectorInSpeed = 0.4;
+    public static double collectorInSpeed = 0.6;
     public static double collectorOutSpeed = -1.0;
     public static Value collectorUpPosition = Value.kOff;
     public static Value collectorDownPosition = Value.kReverse;
