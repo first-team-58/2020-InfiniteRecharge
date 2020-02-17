@@ -8,18 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
+import frc.robot.subsystems.Indexer;
 /**
  * An example command that uses an example subsystem.
  */
-public class ShooterStop extends CommandBase {
-  Shooter m_subsystem;
+public class IndexerBallToCollection extends CommandBase {
+  Indexer m_subsystem;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterStop(Shooter subsystem) {
+  public IndexerBallToCollection(Indexer subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -33,18 +34,19 @@ public class ShooterStop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.setLeftMotor(0);
-      m_subsystem.setRightMotor(0);
+      m_subsystem.setMotor(Constants.indexerOutSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+      m_subsystem.setMotor(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return !m_subsystem.getIndexerBottomBool();
+    //return false;
   }
 }

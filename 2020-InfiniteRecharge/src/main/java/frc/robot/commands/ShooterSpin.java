@@ -7,6 +7,9 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 /**
@@ -33,7 +36,8 @@ public class ShooterSpin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.setMotor(.8);
+      m_subsystem.setLeftMotor(ControlMode.Velocity, SmartDashboard.getNumber("Shooter RPM Setpoint", 0));
+      m_subsystem.setRightMotor(ControlMode.Velocity, SmartDashboard.getNumber("Shooter RPM Setpoint", 0));
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +48,6 @@ public class ShooterSpin extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

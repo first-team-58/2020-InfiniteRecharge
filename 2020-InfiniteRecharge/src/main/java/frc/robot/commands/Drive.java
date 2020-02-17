@@ -57,11 +57,11 @@ public class Drive extends CommandBase {
       rotateValue = rotateValue * (((-.5 * ((m_subsystem.getSpeed()/20000))) + 1));
 
       //-.5x^2 + 1 to reduce steering sensitivity with speed = x
-      SmartDashboard.putNumber("Speed", m_subsystem.getSpeed());
-      SmartDashboard.putBoolean("Slow Speed", m_subsystem.getSlowSpeed());
+      //SmartDashboard.putNumber("Speed", m_subsystem.getSpeed());
+      //SmartDashboard.putBoolean("Slow Speed", m_subsystem.getSlowSpeed());
       //SmartDashboard.putNumber("rotate Modifier", ((-.5 * (((m_subsystem.getSpeed()/20000)) * (m_subsystem.getSpeed()/20000))) + 1));
-      SmartDashboard.putNumber("rotate Modifier", (((-.5 * ((m_subsystem.getSpeed()/20000)))) + 1));
-      System.out.println("Move: " + moveValue + " Rotate: " + rotateValue);
+      //SmartDashboard.putNumber("rotate Modifier", (((-.5 * ((m_subsystem.getSpeed()/20000)))) + 1));
+      //System.out.println("Move: " + moveValue + " Rotate: " + rotateValue);
 
       m_subsystem.drive(moveValue, rotateValue);
   }

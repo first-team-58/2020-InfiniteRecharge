@@ -24,12 +24,12 @@ public final class Constants {
     public static int driveTrainLeftFront = 3;
     public static int driveTrainLeftRear = 4;
     public static int collectorMotor = 5;
-    public static int shooterMotor = 6;
+    public static int leftShooterMotor = 6;
     public static int wheelOfFortuneMotor = 7;
     public static int indexerMotor = 8;
     public static int hangerMotor = 9;
     public static int topIndexer = 10;
-    public static int rightShooter = 11;
+    public static int rightShooterMotor = 11;
 
     //solenoid ports
     public static int driveTrainSolenoid = 0;
@@ -43,8 +43,8 @@ public final class Constants {
 
     //DIO PORTS
     public static int collectorSensor = 0;
-    public static int indexerSensor1 = 1;
-    public static int indexerSensor2 = 2;
+    public static int indexerBottomSensor = 1;
+    public static int indexerTopSensor = 2;
 
     //Collector Constants
     public static double collectorInSpeed = 0.4;
@@ -54,8 +54,8 @@ public final class Constants {
     public static Value collectorOffPosition = Value.kForward;
 
     //collector Constants
-    public static double indexerInSpeed = -0.3;
-    public static double indexerOutSpeed = 0.2;
+    public static double indexerInSpeed = -0.3 ;
+    public static double indexerOutSpeed = 0.3;
 
     //Hanger Constants
     public static double hangerUpSpeed = 1.0;
@@ -69,10 +69,15 @@ public final class Constants {
     public static Value wOFRetractedState = Value.kReverse;
 
     //shooter Constants
-    public static double shooter_kF = 0;
-    public static double shooter_kP = 0;
-    public static double shooter_kI = 0;
-    public static double shooter_kD = 0;
+    public static double shooterL_kF = .27; //.27
+    public static double shooterL_kP = .005;
+    public static double shooterL_kI = 0;
+    public static double shooterL_kD = 0;
+
+    public static double shooterR_kF = .27;
+    public static double shooterR_kP = .005;
+    public static double shooterR_kI = 0;
+    public static double shooterR_kD = 0;
     public static double shooter_speedTarget = 1; //needs to be set in units / 100ms, so 500 rpm would be 500.0 * 4960 (encoder ticks per revolution) / 600
 
     //drive Constants

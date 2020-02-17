@@ -8,21 +8,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
+import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Indexer;
 /**
  * An example command that uses an example subsystem.
  */
-public class ShooterStop extends CommandBase {
-  Shooter m_subsystem;
+public class CollectorBallToShooter extends CommandBase {
+  Collector collector;
+  Indexer indexer;
+  public static int count = 0;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterStop(Shooter subsystem) {
-    m_subsystem = subsystem;
+  public CollectorBallToShooter(Collector subsystem, Indexer subsystem2) {
+    collector = subsystem;
+    indexer = subsystem2;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    //addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,9 +38,31 @@ public class ShooterStop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.setLeftMotor(0);
-      m_subsystem.setRightMotor(0);
-  }
+    //if(collector.getSolenoidState().equals(Constants.collectorUpPosition)) {
+      if(count < 100) {
+        collector.setSolenoidState(Constants.collectorDownPosition);  
+      } else {
+        collector.setSolenoidState(Constants.collectorOffPosition);
+      }
+
+      if(count > 150) {
+
+      } else {
+        count++;
+      }
+    
+    collector.setMotor(Constants.collectorInSpeed);
+
+      if(!indexer.getIndexerBottomBool()) {
+          //run both up to shooter
+          indexer.setMotor( -1.0 * Constants.collectorInSpeed);
+      } else {
+          //run top in, and bottom out
+          indexer.setTopMotor( -1.0 * Constants.collectorInSpeed);
+          indexer.setBottomMotor(1.0 * Constants.collectorInSpeed);
+      }
+
+    }
 
   // Called once the command ends or is interrupted.
   @Override

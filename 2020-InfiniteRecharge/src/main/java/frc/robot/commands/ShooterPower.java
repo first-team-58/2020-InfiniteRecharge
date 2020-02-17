@@ -7,19 +7,22 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 /**
  * An example command that uses an example subsystem.
  */
-public class ShooterStop extends CommandBase {
+public class ShooterPower extends CommandBase {
   Shooter m_subsystem;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterStop(Shooter subsystem) {
+  public ShooterPower(Shooter subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -33,8 +36,8 @@ public class ShooterStop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.setLeftMotor(0);
-      m_subsystem.setRightMotor(0);
+      m_subsystem.setLeftMotor(.25);
+      m_subsystem.setRightMotor(.25);
   }
 
   // Called once the command ends or is interrupted.
@@ -48,3 +51,4 @@ public class ShooterStop extends CommandBase {
     return true;
   }
 }
+

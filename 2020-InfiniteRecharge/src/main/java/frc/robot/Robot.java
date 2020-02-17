@@ -35,6 +35,8 @@ public class Robot extends TimedRobot {
 
     m_robotContainer = new RobotContainer();
     m_drive = m_robotContainer.getDriveCommand();
+    //Limelight.setLimelightLeds(1);
+    SmartDashboard.putNumber("Shooter RPM Setpoint", 0.0);
   }
 
   /**
@@ -51,9 +53,14 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Shooter Speed", RobotContainer.m_shooter.getMotorSpeed());
-    SmartDashboard.putNumber("Shooter Speed Percent", RobotContainer.m_shooter.getMotorSpeedPercent());
-    
+    SmartDashboard.putNumber("Shooter Speed", RobotContainer.m_shooter.getLeftMotorSpeed());
+    SmartDashboard.putNumber("Shooter Speed Percent", RobotContainer.m_shooter.getLeftMotorSpeedPercent());
+    SmartDashboard.putNumber("Left Shooter Speed", RobotContainer.m_shooter.getLeftMotorSpeed());
+    SmartDashboard.putNumber("Right Shooter Speed", RobotContainer.m_shooter.getRightMotorSpeed());
+    SmartDashboard.putNumber("Left Shooter PID Error", RobotContainer.m_shooter.getLeftMotorPIDError());
+    SmartDashboard.putNumber("Right Shooter PID Error", RobotContainer.m_shooter.getRightMotorPIDError());
+    SmartDashboard.putNumber("Left Shooter Raw Speed", RobotContainer.m_shooter.getLeftRawSpeed());
+    SmartDashboard.putNumber("Right Shooter Raw Speed", RobotContainer.m_shooter.getRightRawSpeed());
   }
 
   /**
@@ -96,6 +103,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    Limelight.setLimelightLeds(0);
   }
 
   /**
@@ -104,6 +112,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     m_drive.schedule();
+    RobotContainer.m_shooter.setLeftMotor(RobotContainer.m_driverController.getRawAxis(2));
+    RobotContainer.m_shooter.setRightMotor(RobotContainer.m_driverController.getRawAxis(3));
+    
   }
 
   @Override

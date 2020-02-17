@@ -61,17 +61,17 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getSpeed() {
-    SmartDashboard.putNumber("DTRF", driveTrainRightFront.getSensorCollection().getIntegratedSensorVelocity());
-    SmartDashboard.putNumber("DTRR", driveTrainRightRear.getSensorCollection().getIntegratedSensorVelocity());
-    SmartDashboard.putNumber("DTLF", driveTrainLeftFront.getSensorCollection().getIntegratedSensorVelocity());
-    SmartDashboard.putNumber("DTLR", driveTrainLeftRear.getSensorCollection().getIntegratedSensorVelocity());
+    //SmartDashboard.putNumber("DTRF", driveTrainRightFront.getSensorCollection().getIntegratedSensorVelocity());
+    //SmartDashboard.putNumber("DTRR", driveTrainRightRear.getSensorCollection().getIntegratedSensorVelocity());
+    //SmartDashboard.putNumber("DTLF", driveTrainLeftFront.getSensorCollection().getIntegratedSensorVelocity());
+    //SmartDashboard.putNumber("DTLR", driveTrainLeftRear.getSensorCollection().getIntegratedSensorVelocity());
     
 
     double speed = 
     (-1.0 * driveTrainLeftFront.getSensorCollection().getIntegratedSensorVelocity()) + 
-    (-1.0 * driveTrainLeftRear.getSensorCollection().getIntegratedSensorVelocity()) + 
-    driveTrainRightFront.getSensorCollection().getIntegratedSensorVelocity() +
-    driveTrainRightRear.getSensorCollection().getIntegratedSensorVelocity();
+    //(-1.0 * driveTrainLeftRear.getSensorCollection().getIntegratedSensorVelocity()) + 
+    driveTrainRightFront.getSensorCollection().getIntegratedSensorVelocity() ;//+
+    //driveTrainRightRear.getSensorCollection().getIntegratedSensorVelocity();
 
     return speed / 4.0 ;
   }
