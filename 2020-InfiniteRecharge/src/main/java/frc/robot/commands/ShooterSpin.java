@@ -36,8 +36,9 @@ public class ShooterSpin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.setLeftMotor(ControlMode.Velocity, SmartDashboard.getNumber("Shooter RPM Setpoint", 0));
-      m_subsystem.setRightMotor(ControlMode.Velocity, SmartDashboard.getNumber("Shooter RPM Setpoint", 0));
+      m_subsystem.setLeftMotor(ControlMode.Velocity, SmartDashboard.getNumber("Shooter RPM Setpoint", 0) * 20);
+      m_subsystem.setRightMotor(ControlMode.Velocity, SmartDashboard.getNumber("Shooter RPM Setpoint", 0) * 20);
+      
   }
 
   // Called once the command ends or is interrupted.

@@ -69,15 +69,15 @@ public final class Constants {
     public static Value wOFRetractedState = Value.kReverse;
 
     //shooter Constants
-    public static double shooterL_kF = .27; //.27
-    public static double shooterL_kP = .005;
-    public static double shooterL_kI = 0;
-    public static double shooterL_kD = 0;
+    public static double shooterL_kF = 1.0*(1023.0/120000.0); //.27
+    public static double shooterL_kP = 0.004;
+    public static double shooterL_kI = 0.001;
+    public static double shooterL_kD = 0;//2;
 
-    public static double shooterR_kF = .27;
-    public static double shooterR_kP = .005;
-    public static double shooterR_kI = 0;
-    public static double shooterR_kD = 0;
+    public static double shooterR_kF = 1.04*(1023.0/120000.0);//1023.0/7200.0; //1023.0 / 7200.0;
+    public static double shooterR_kP = 0.004; //.025;
+    public static double shooterR_kI = 0.001; //.0001;
+    public static double shooterR_kD = 0;//2; //2;
     public static double shooter_speedTarget = 1; //needs to be set in units / 100ms, so 500 rpm would be 500.0 * 4960 (encoder ticks per revolution) / 600
 
     //drive Constants

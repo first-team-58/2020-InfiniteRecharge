@@ -25,6 +25,9 @@ public class Shooter extends SubsystemBase {
     leftMotor = new WPI_TalonSRX(Constants.leftShooterMotor);
     rightMotor = new WPI_TalonSRX(Constants.rightShooterMotor);
     //rightMotor.follow(leftMotor);
+    leftMotor.configFactoryDefault();
+    rightMotor.configFactoryDefault();
+
     rightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     leftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
@@ -48,11 +51,14 @@ public class Shooter extends SubsystemBase {
     leftMotor.config_kP(0, Constants.shooterL_kP);
     leftMotor.config_kI(0, Constants.shooterL_kI);
     leftMotor.config_kD(0, Constants.shooterL_kD);
+    //leftMotor.configClosedloopRamp(10.0);
+    leftMotor.config_IntegralZone(0, 300);
 
     rightMotor.config_kF(0, Constants.shooterR_kF);
     rightMotor.config_kP(0, Constants.shooterR_kP);
     rightMotor.config_kI(0, Constants.shooterR_kI);
     rightMotor.config_kD(0, Constants.shooterR_kD);
+    rightMotor.config_IntegralZone(0, 300);
   }
 
   @Override
