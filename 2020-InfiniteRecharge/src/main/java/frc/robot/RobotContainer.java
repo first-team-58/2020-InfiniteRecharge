@@ -41,17 +41,29 @@ public class RobotContainer {
   //public final ParallelRaceGroup m_autocmd = new DriveForwardAuto(m_drivetrain).withTimeout(3);
 // Controller stuff
   public static final XboxController m_driverController = new XboxController(0);
+  public static final XboxController m_operatorController = new XboxController(1);
 
   private static final JoystickButton m_driverAButton = new JoystickButton(m_driverController, 1);
   private static final JoystickButton m_driverBButton = new JoystickButton(m_driverController, 2);
   private static final JoystickButton m_driverXButton = new JoystickButton(m_driverController, 3);
   private static final JoystickButton m_driverYButton = new JoystickButton(m_driverController, 4);
   private static final JoystickButton m_driverLSButton = new JoystickButton(m_driverController, 9);
+  private static final JoystickButton m_driverRSButton = new JoystickButton(m_driverController, 10);
   private static final JoystickButton m_driverRBButton = new JoystickButton(m_driverController, 6);
   private static final JoystickButton m_driverLBButton = new JoystickButton(m_driverController, 5);
   private static final JoystickButton m_driverStButton = new JoystickButton(m_driverController, 8);
   private static final JoystickButton m_driverSeButton = new JoystickButton(m_driverController, 7);
   
+  private static final JoystickButton m_operatorAButton = new JoystickButton(m_operatorController, 1);
+  private static final JoystickButton m_operatorBButton = new JoystickButton(m_operatorController, 2);
+  private static final JoystickButton m_operatorXButton = new JoystickButton(m_operatorController, 3);
+  private static final JoystickButton m_operatorYButton = new JoystickButton(m_operatorController, 4);
+  private static final JoystickButton m_operatorLSButton = new JoystickButton(m_operatorController, 9);
+  private static final JoystickButton m_operatorRSButton = new JoystickButton(m_operatorController, 10);
+  private static final JoystickButton m_operatorRBButton = new JoystickButton(m_operatorController, 6);
+  private static final JoystickButton m_operatorLBButton = new JoystickButton(m_operatorController, 5);
+  private static final JoystickButton m_operatorStButton = new JoystickButton(m_operatorController, 8);
+  private static final JoystickButton m_operatorSeButton = new JoystickButton(m_operatorController, 7);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
