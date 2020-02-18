@@ -83,7 +83,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getLeftMotorSpeed() {
-    return ((leftMotor.getSelectedSensorVelocity() * 600.0) / 4096.0)/3.0;
+    return ((leftMotor.getSelectedSensorVelocity() * 600.0) / 4096.0);
   }
   //https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/tree/master/Java/VelocityClosedLoop/src/main/java/frc/robot
   public int getLeftMotorSpeedPercent() {
@@ -91,7 +91,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getRightMotorSpeed() {
-    return ((rightMotor.getSelectedSensorVelocity() * 600.0) / 4096.0)/3.0;
+    return ((rightMotor.getSelectedSensorVelocity() * 600.0) / 4096.0);
   }
   //https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/tree/master/Java/VelocityClosedLoop/src/main/java/frc/robot
   public int getRightMotorSpeedPercent() {
