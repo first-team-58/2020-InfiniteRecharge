@@ -53,7 +53,7 @@ public final class Constants {
     public static Value collectorDownPosition = Value.kReverse;
     public static Value collectorOffPosition = Value.kForward;
 
-    //collector Constants
+    //indexer Constants
     public static double indexerInSpeed = -0.3 ;
     public static double indexerOutSpeed = 0.3;
 

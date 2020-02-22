@@ -66,7 +66,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Limelight camtran x", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[0]);
     SmartDashboard.putNumber("Limelight camtran y", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[1]);
     SmartDashboard.putNumber("Limelight camtran z", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[2]);
-
+    SmartDashboard.putNumber("Navx reported Orentation", RobotContainer.m_drivetrain.getNavx().getYaw());
+    SmartDashboard.putNumber("Left Drive Train Distance", RobotContainer.m_drivetrain.getLeftDistance());
+    SmartDashboard.putNumber("Right Drive Train Distance", RobotContainer.m_drivetrain.getRightDistance());
   }
 
   /**
@@ -110,6 +112,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     Limelight.setLimelightLeds(0);
+    RobotContainer.m_drivetrain.zeroEncoders();
   }
 
   /**
@@ -118,8 +121,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     m_drive.schedule();
-    RobotContainer.m_shooter.setLeftMotor(RobotContainer.m_driverController.getRawAxis(2));
-    RobotContainer.m_shooter.setRightMotor(RobotContainer.m_driverController.getRawAxis(3));
+    //RobotContainer.m_shooter.setLeftMotor(RobotContainer.m_driverController.getRawAxis(2));
+    //RobotContainer.m_shooter.setRightMotor(RobotContainer.m_driverController.getRawAxis(3));
     
   }
 

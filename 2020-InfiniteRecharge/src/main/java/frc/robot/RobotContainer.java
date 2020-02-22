@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Drivetrain;
@@ -47,23 +48,25 @@ public class RobotContainer {
   private static final JoystickButton m_driverBButton = new JoystickButton(m_driverController, 2);
   private static final JoystickButton m_driverXButton = new JoystickButton(m_driverController, 3);
   private static final JoystickButton m_driverYButton = new JoystickButton(m_driverController, 4);
+  private static final JoystickButton m_driverLBButton = new JoystickButton(m_driverController, 5);
+  private static final JoystickButton m_driverRBButton = new JoystickButton(m_driverController, 6);
+  private static final JoystickButton m_driverSeButton = new JoystickButton(m_driverController, 7);
+  private static final JoystickButton m_driverStButton = new JoystickButton(m_driverController, 8);
   private static final JoystickButton m_driverLSButton = new JoystickButton(m_driverController, 9);
   private static final JoystickButton m_driverRSButton = new JoystickButton(m_driverController, 10);
-  private static final JoystickButton m_driverRBButton = new JoystickButton(m_driverController, 6);
-  private static final JoystickButton m_driverLBButton = new JoystickButton(m_driverController, 5);
-  private static final JoystickButton m_driverStButton = new JoystickButton(m_driverController, 8);
-  private static final JoystickButton m_driverSeButton = new JoystickButton(m_driverController, 7);
-  
+  private static final JoystickAnalogButton m_driverRTrButton = new JoystickAnalogButton(m_driverController, 3, JoystickAnalogButton.direction.UP);
+  private static final JoystickAnalogButton m_driverLTrButton = new JoystickAnalogButton(m_driverController, 2, JoystickAnalogButton.direction.UP);
+
   private static final JoystickButton m_operatorAButton = new JoystickButton(m_operatorController, 1);
   private static final JoystickButton m_operatorBButton = new JoystickButton(m_operatorController, 2);
   private static final JoystickButton m_operatorXButton = new JoystickButton(m_operatorController, 3);
   private static final JoystickButton m_operatorYButton = new JoystickButton(m_operatorController, 4);
+  private static final JoystickButton m_operatorLBButton = new JoystickButton(m_operatorController, 5);
+  private static final JoystickButton m_operatorRBButton = new JoystickButton(m_operatorController, 6);
+  private static final JoystickButton m_operatorSeButton = new JoystickButton(m_operatorController, 7);
+  private static final JoystickButton m_operatorStButton = new JoystickButton(m_operatorController, 8);
   private static final JoystickButton m_operatorLSButton = new JoystickButton(m_operatorController, 9);
   private static final JoystickButton m_operatorRSButton = new JoystickButton(m_operatorController, 10);
-  private static final JoystickButton m_operatorRBButton = new JoystickButton(m_operatorController, 6);
-  private static final JoystickButton m_operatorLBButton = new JoystickButton(m_operatorController, 5);
-  private static final JoystickButton m_operatorStButton = new JoystickButton(m_operatorController, 8);
-  private static final JoystickButton m_operatorSeButton = new JoystickButton(m_operatorController, 7);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -104,6 +107,9 @@ public class RobotContainer {
     m_driverStButton.whenReleased(new IndexerStop(m_indexer));
     m_driverSeButton.whenPressed(new IndexerOut(m_indexer));
     m_driverSeButton.whenReleased(new IndexerStop(m_indexer));
+    m_driverRTrButton.whileHeld(new CollectorBallToShooter(m_collector, m_indexer));
+    m_driverRTrButton.whenReleased(new StopCollecting(m_collector, m_indexer));
+    m_driverYButton.whenPressed(new PIDDistanceDrive(m_drivetrain, 25));
   }
 
 

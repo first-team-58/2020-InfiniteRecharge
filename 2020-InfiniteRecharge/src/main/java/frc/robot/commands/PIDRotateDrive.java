@@ -8,13 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Limelight;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class Drive extends CommandBase {
+public class PIDRotateDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
 
@@ -23,7 +24,7 @@ public class Drive extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Drive(Drivetrain subsystem) {
+  public PIDRotateDrive(Drivetrain subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     //addRequirements(subsystem);
@@ -32,38 +33,20 @@ public class Drive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+      m_subsystem.positionAchieved = false;
+      m_subsystem.getNavx().setAngleAdjustment(180.0 - m_subsystem.getNavx().getAngle());
+      m_subsystem.rotationSetpoint =  180 - Limelight.getTargetHorizontalAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      double moveValue = RobotContainer.m_driverController.getRawAxis(1);
-      double rotateValue = RobotContainer.m_driverController.getRawAxis(4);
+            double moveValue = RobotContainer.m_driverController.getRawAxis(1);
+			if ((moveValue <= 0.1) && (moveValue >= -0.1)) {
+				moveValue = 0;
+			}
 
-      if(Math.abs(moveValue) < .2) {
-          moveValue = 0;
-      }
-
-      if(m_subsystem.getSlowSpeed()) {
-        moveValue = .5*moveValue;
-      }
-
-      if(Math.abs(rotateValue) < .2) {
-          rotateValue = 0;
-      }
-
-      //rotateValue = rotateValue * ((-.5 * (((m_subsystem.getSpeed()/20000)) * (m_subsystem.getSpeed()/20000))) + 1);
-      rotateValue = rotateValue * (((-.5 * ((m_subsystem.getSpeed()/20000))) + 1));
-
-      //-.5x^2 + 1 to reduce steering sensitivity with speed = x
-      //SmartDashboard.putNumber("Speed", m_subsystem.getSpeed());
-      //SmartDashboard.putBoolean("Slow Speed", m_subsystem.getSlowSpeed());
-      //SmartDashboard.putNumber("rotate Modifier", ((-.5 * (((m_subsystem.getSpeed()/20000)) * (m_subsystem.getSpeed()/20000))) + 1));
-      //SmartDashboard.putNumber("rotate Modifier", (((-.5 * ((m_subsystem.getSpeed()/20000)))) + 1));
-      //System.out.println("Move: " + moveValue + " Rotate: " + rotateValue);
-      if(!m_subsystem.pidEnabled) {
-        m_subsystem.drive(moveValue, rotateValue);
-      }
+			RobotContainer.m_drivetrain.pidDriveRotate(moveValue);
   }
 
   // Called once the command ends or is interrupted.
@@ -74,6 +57,6 @@ public class Drive extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_subsystem.positionAchieved;
   }
 }

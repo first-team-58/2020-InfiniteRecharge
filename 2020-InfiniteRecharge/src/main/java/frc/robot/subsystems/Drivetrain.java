@@ -8,10 +8,18 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -21,17 +29,64 @@ public class Drivetrain extends SubsystemBase {
 
     private DifferentialDrive drive;
 
+    private AHRS navx;
+
+    public double P = 0.06, I = 0.01, D = 0.0;
+    public int pidPosCnt = 0;
+
     private boolean slowSpeed = false;
+    private double integral, previous_error;
+    public double rotationSetpoint = 0, distanceSetpoint = 0;
+    double rcw, pspd, pspd_prev;
+    public boolean positionAchieved = false;
+
+    public boolean pidEnabled = false;
   /**
    * Creates a new Drivetrain.
    */
   public Drivetrain() {
+    navx = new AHRS();
+
     driveTrainRightFront = new WPI_TalonFX(Constants.driveTrainRightFront);
     driveTrainRightRear = new WPI_TalonFX(Constants.driveTrainRightRear);
     driveTrainLeftFront = new WPI_TalonFX(Constants.driveTrainLeftFront);
     driveTrainLeftRear = new WPI_TalonFX(Constants.driveTrainLeftRear);
 
     driveSolenoid = new Solenoid(Constants.driveTrainSolenoid);
+
+    // driveTrainRightRear.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    // driveTrainLeftRear.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
+    // //driveTrainLeftRear.setNeutralMode(NeutralMode.Coast);
+    // //driveTrainRightRear.setNeutralMode(NeutralMode.Coast);
+    
+    // driveTrainLeftRear.setSensorPhase(true);
+    // driveTrainRightRear.setSensorPhase(false);
+
+    // driveTrainLeftRear.configNominalOutputForward(0);
+    // driveTrainLeftRear.configNominalOutputReverse(0);
+    // driveTrainLeftRear.configPeakOutputForward(1);
+    // driveTrainLeftRear.configPeakOutputReverse(-1);
+    
+    // driveTrainRightRear.configNominalOutputForward(0);
+    // driveTrainRightRear.configNominalOutputReverse(0);
+    // driveTrainRightRear.configPeakOutputForward(1);
+    // driveTrainRightRear.configPeakOutputReverse(-1);
+
+    // //driveTrainLeftRear.config_kF(0, Constants.shooterL_kF);
+    // driveTrainLeftRear.config_kP(0, P);
+    // driveTrainLeftRear.config_kI(0, Constants.shooterL_kI);
+    // driveTrainLeftRear.config_kD(0, Constants.shooterL_kD);
+    // //leftMotor.configClosedloopRamp(10.0);
+    // driveTrainLeftRear.config_IntegralZone(0, 300);
+
+    // //driveTrainRightRear.config_kF(0, Constants.shooterL_kF);
+    // driveTrainRightRear.config_kP(0, P);
+    // driveTrainRightRear.config_kI(0, I);
+    // driveTrainRightRear.config_kD(0, D);
+    // //leftMotor.configClosedloopRamp(10.0);
+    // driveTrainRightRear.config_IntegralZone(0, 300);
+
 
     driveTrainLeftFront.follow(driveTrainLeftRear);
     driveTrainRightFront.follow(driveTrainRightRear);
@@ -52,12 +107,128 @@ public class Drivetrain extends SubsystemBase {
   public void toggleSlowSpeed() {
     //slowSpeed = !slowSpeed;
     driveSolenoid.set(!driveSolenoid.get());
-
+    zeroEncoders();
   }
 
   public boolean getSlowSpeed() {
     return slowSpeed;
   }
+
+  public void setDriveStates(TrapezoidProfile.State left, TrapezoidProfile.State right) {
+    System.out.println("Test");
+    driveTrainLeftRear.set(TalonFXControlMode.Position, left.position);
+    driveTrainRightRear.set(TalonFXControlMode.Position, right.position);
+  }
+
+public double getLeftDistance() {
+  double raw = (driveTrainLeftFront.getSelectedSensorPosition() + driveTrainLeftRear.getSelectedSensorPosition()) /2;
+  double actual;
+  if(driveSolenoid.get()) {
+    //slow ratio
+    double ratio = 12.86;
+    double circumference = 15.70796;
+    double cpr = 1024;
+    actual = ((raw / cpr) / ratio) * circumference;
+  } else {
+    //fast ratio
+    double ratio = 6.25;
+    double circumference = 15.70796;
+    double cpr = 1024;
+    actual = ((raw / cpr) / ratio) * circumference;
+  }
+
+  return -1.0 * actual;
+}
+
+public void zeroEncoders() {
+  driveTrainLeftFront.getSensorCollection().setIntegratedSensorPosition(0.0, 100);
+  driveTrainLeftRear.getSensorCollection().setIntegratedSensorPosition(0.0, 100);
+  driveTrainRightFront.getSensorCollection().setIntegratedSensorPosition(0.0, 100);
+  driveTrainRightRear.getSensorCollection().setIntegratedSensorPosition(0.0, 100);
+}
+
+public double getRightDistance() {
+  double raw = (driveTrainRightFront.getSelectedSensorPosition() + driveTrainRightRear.getSelectedSensorPosition()) /2;
+  double actual;
+  if(driveSolenoid.get()) {
+    //slow ratio
+    double ratio = 12.86;
+    double circumference = 15.70796;
+    double cpr = 1024;
+    actual = ((raw / cpr) / ratio) * circumference;
+  } else {
+    //fast ratio
+    double ratio = 6.25;
+    double circumference = 15.70796;
+    double cpr = 1024;
+    actual = ((raw / cpr) / ratio) * circumference;
+  }
+
+  return actual;
+}
+
+public void pidDriveRotate(double speed) {
+  PIDRotation();
+  drive(speed, rcw);
+}
+
+public void pidDrivePosition() {
+  PIDPosition();
+  drive(-1.0 * pspd, 0);
+}
+
+private void PIDRotation() {
+    double error = rotationSetpoint - navx.getAngle();
+		this.integral += (error * .02);
+		double derivative = (error - this.previous_error) / .02;
+		this.rcw = P * error + I * this.integral + D * derivative;
+		if(error < 2 && previous_error < 2) {
+      positionAchieved = true;
+      pidEnabled = false;
+    }
+    this.previous_error = error;
+}
+
+private void PIDPosition() {
+  double error = distanceSetpoint - ((getRightDistance() + getLeftDistance())/2);
+  // if((this.integral + (error * .02)) > .3) {
+  //   this.integral = .3;
+  // } else if((this.integral + (error * .02) < -.3)) {
+  //   this.integral = -.3;
+  // } else {
+    this.integral += (error * .02);
+  //}
+  double derivative = (error - this.previous_error) / .02;
+  double new_ppsd = P * error + I * this.integral + D * derivative;
+  pspd_prev = pspd;
+  if(new_ppsd > (pspd + .05)) {
+    pspd = pspd + .05;
+  } else {
+    this.pspd = new_ppsd;
+  }
+
+  if(pspd > .5) {
+    pspd = .5;
+  }
+  
+  SmartDashboard.putNumber("PIDPosition error", error);
+  SmartDashboard.putNumber("PIDPosition integral", integral);
+  SmartDashboard.putNumber("PIDPosition der", derivative);
+  SmartDashboard.putNumber("PIDPosition pos", ((getRightDistance() + getLeftDistance())/2));
+  if(error < .5 && previous_error < .5) {
+    pidPosCnt++;
+    if(pidPosCnt > 100) {
+      positionAchieved = true;
+      pidEnabled = false;
+      pspd = 0;
+      pspd_prev = 0;
+      //System.out.println("position achieved");
+    }
+  } else {
+    pidPosCnt = 0;
+  }
+  this.previous_error = error;
+}
 
   public double getSpeed() {
     //SmartDashboard.putNumber("DTRF", driveTrainRightFront.getSensorCollection().getIntegratedSensorVelocity());
@@ -73,5 +244,9 @@ public class Drivetrain extends SubsystemBase {
     //driveTrainRightRear.getSensorCollection().getIntegratedSensorVelocity();
 
     return speed / 4.0 ;
+  }
+
+  public AHRS getNavx() {
+    return navx;
   }
 }
