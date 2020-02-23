@@ -9,20 +9,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hanger;
+import frc.robot.subsystems.WheelOfFortune;
 /**
  * An example command that uses an example subsystem.
  */
 public class WOFStop extends CommandBase {
-    Hanger m_subsystem;
+    WheelOfFortune m_subsystem;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public WOFStop(Hanger subsystem) {
+  public WOFStop(WheelOfFortune subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    //addRequirements(subsystem);
     
   }
 
@@ -40,6 +41,6 @@ public class WOFStop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

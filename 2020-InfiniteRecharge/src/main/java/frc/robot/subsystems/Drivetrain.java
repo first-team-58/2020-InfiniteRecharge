@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Limelight;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -32,12 +33,13 @@ public class Drivetrain extends SubsystemBase {
     private AHRS navx;
 
     public double P = 0.06, I = 0.01, D = 0.0;
-    public int pidPosCnt = 0;
+    public double Pr = 0.01, Ir = 0.004, Dr = 0;
+    public int pidPosCnt = 0, pidRotCnt = 0;
 
     private boolean slowSpeed = false;
     private double integral, previous_error;
     public double rotationSetpoint = 0, distanceSetpoint = 0;
-    double rcw, pspd, pspd_prev;
+    double rcw, rcw_prev, pspd, pspd_prev;
     public boolean positionAchieved = false;
 
     public boolean pidEnabled = false;
@@ -107,6 +109,11 @@ public class Drivetrain extends SubsystemBase {
   public void toggleSlowSpeed() {
     //slowSpeed = !slowSpeed;
     driveSolenoid.set(!driveSolenoid.get());
+    zeroEncoders();
+  }
+
+  public void setSlowSpeed(boolean state) {
+    driveSolenoid.set(state);
     zeroEncoders();
   }
 
@@ -181,10 +188,40 @@ private void PIDRotation() {
     double error = rotationSetpoint - navx.getAngle();
 		this.integral += (error * .02);
 		double derivative = (error - this.previous_error) / .02;
-		this.rcw = P * error + I * this.integral + D * derivative;
-		if(error < 2 && previous_error < 2) {
-      positionAchieved = true;
-      pidEnabled = false;
+		//this.rcw = Pr * error + Ir * this.integral + Dr * derivative;
+    
+    double new_rcw = P * error + I * this.integral + D * derivative;
+    rcw_prev = rcw;
+    if(new_rcw > (rcw + .02)) {
+      rcw = rcw + .02;
+    } else if (new_rcw < (rcw - .02)) {
+      rcw = rcw -.02;
+    } else {
+      this.rcw = new_rcw;
+    }
+  
+    if(rcw > .4) {
+      rcw = .4;
+    } else if (rcw < -.4) {
+      rcw = -.4;
+    }
+
+    SmartDashboard.putNumber("PIDPosition error", error);
+    SmartDashboard.putNumber("PIDPosition integral", integral);
+    //SmartDashboard.putNumber("PIDPosition der", derivative);
+    SmartDashboard.putNumber("PIDPosition pos", navx.getAngle());
+    SmartDashboard.putNumber("PIDPosition out", rcw);
+    SmartDashboard.putNumber("PIDPosition target", rotationSetpoint);
+    
+    if(Math.abs(error) < 1 && Math.abs(previous_error) < 1) {
+      pidRotCnt++;
+      if(pidRotCnt > 100) {
+        positionAchieved = true;
+        pidEnabled = false;
+        Limelight.setLimelightLeds(1);
+      }
+    } else {
+      pidRotCnt = 0;
     }
     this.previous_error = error;
 }

@@ -23,14 +23,14 @@ public class HangerRelease extends CommandBase {
   public HangerRelease(Hanger subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    //addRequirements(subsystem);
     
   }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-       m_subsystem.setSolenoidState(Constants.hangerReleaseState);
+       m_subsystem.setArmState(Constants.hangerArmState);
     }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +41,6 @@ public class HangerRelease extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

@@ -12,7 +12,11 @@ public class Limelight {
     }
 
     public static boolean isTargetAvailable() {
-        return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getBoolean(false);
+        if(NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static double getTargetHorizontalAngle() {
@@ -22,5 +26,9 @@ public class Limelight {
     public static double getDistanceToTarget() {
         double[] camtran = NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getDoubleArray(new double[] {0,0,0,0,0,0});
         return (double) Math.sqrt( Math.pow(camtran[0],2) + Math.pow(camtran[2], 2));
+    }
+
+    public static void setLimelightPipeline(int value) {
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(value);
     }
 }

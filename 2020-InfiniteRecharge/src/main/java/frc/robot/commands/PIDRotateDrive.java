@@ -34,8 +34,9 @@ public class PIDRotateDrive extends CommandBase {
   @Override
   public void initialize() {
       m_subsystem.positionAchieved = false;
-      m_subsystem.getNavx().setAngleAdjustment(180.0 - m_subsystem.getNavx().getAngle());
-      m_subsystem.rotationSetpoint =  180 - Limelight.getTargetHorizontalAngle();
+      
+      //m_subsystem.getNavx().setAngleAdjustment(180.0 - m_subsystem.getNavx().getAngle());
+      m_subsystem.rotationSetpoint =  m_subsystem.getNavx().getAngle() + Limelight.getTargetHorizontalAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

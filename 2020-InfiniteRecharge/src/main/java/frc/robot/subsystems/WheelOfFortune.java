@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -14,12 +15,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class WheelOfFortune extends SubsystemBase {
   private WPI_TalonSRX motor;
+  private Solenoid solenoid;
 
   /**
    * Creates a new Collector.
    */
   public WheelOfFortune() {
     motor = new WPI_TalonSRX(Constants.wheelOfFortuneMotor);
+    solenoid = new Solenoid(Constants.wheelOfFortuneSolenoid1);
   }
 
   @Override
@@ -29,6 +32,10 @@ public class WheelOfFortune extends SubsystemBase {
 
   public void setMotor(double speed) {
       motor.set(speed);
+  }
+
+  public void setSolenoidState(boolean state) {
+    solenoid.set(state);
   }
 
 }

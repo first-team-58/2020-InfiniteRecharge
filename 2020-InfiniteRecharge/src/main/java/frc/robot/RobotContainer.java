@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 
@@ -67,6 +69,8 @@ public class RobotContainer {
   private static final JoystickButton m_operatorStButton = new JoystickButton(m_operatorController, 8);
   private static final JoystickButton m_operatorLSButton = new JoystickButton(m_operatorController, 9);
   private static final JoystickButton m_operatorRSButton = new JoystickButton(m_operatorController, 10);
+  private static final JoystickAnalogButton m_operatorRTrButton = new JoystickAnalogButton(m_operatorController, 3, JoystickAnalogButton.direction.UP);
+  private static final JoystickAnalogButton m_operatorLTrButton = new JoystickAnalogButton(m_operatorController, 2, JoystickAnalogButton.direction.UP);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -88,14 +92,14 @@ public class RobotContainer {
     //m_driverAButton.whenPressed(new CollectorIn(m_collector));
     //m_driverAButton.whenReleased(new CollectorStop(m_collector));
     //m_driverAButton.whenPressed(new CollectorDown(m_collector));
-    m_driverAButton.whileHeld(new CollectorBallToShooter(m_collector, m_indexer));
-    m_driverAButton.whenReleased(new StopCollecting(m_collector, m_indexer));
+    //m_driverAButton.whileHeld(new CollectorBallToShooter(m_collector, m_indexer));
+    //m_driverAButton.whenReleased(new StopCollecting(m_collector, m_indexer));
     //m_driverAButton.whenPressed(new CollectorDeploy(m_collector));
     //m_driverAButton.whenReleased(new CollectorRetract(m_collector));
     m_driverRBButton.whileHeld(new ShooterSpin(m_shooter));
     m_driverRBButton.whenReleased(new ShooterStop(m_shooter));
-    m_driverLBButton.whenPressed(new CollectorkReverse(m_collector));
-    m_driverLBButton.whenReleased(new CollectorkForward(m_collector));
+    m_driverLBButton.whenPressed(new HangerBrakeOn(m_hanger));
+    m_driverLBButton.whenReleased(new HangerBrakeOff(m_hanger));
     //m_driverBButton.whenPressed(new ConditionalCommand(new IndexerIn(m_indexer), new IndexerStop(m_indexer), m_indexer.getIndexerLast()::get));
     m_driverBButton.whenPressed(new IndexerBallToShooter(m_indexer));
     m_driverBButton.whenReleased(new IndexerStop(m_indexer));
@@ -109,7 +113,15 @@ public class RobotContainer {
     m_driverSeButton.whenReleased(new IndexerStop(m_indexer));
     m_driverRTrButton.whileHeld(new CollectorBallToShooter(m_collector, m_indexer));
     m_driverRTrButton.whenReleased(new StopCollecting(m_collector, m_indexer));
-    m_driverYButton.whenPressed(new PIDDistanceDrive(m_drivetrain, 25));
+    //m_driverYButton.whenPressed(new PIDDistanceDrive(m_drivetrain, 25));
+    m_driverYButton.whenPressed(new SequentialCommandGroup(new EnableLimelight(), new WaitCommand(1), new PIDRotateDrive(m_drivetrain)));
+
+    m_operatorAButton.whenPressed(new WOFDeploy(m_wheelOfFortune));
+    m_operatorAButton.whenReleased(new WOFRetract(m_wheelOfFortune));
+    m_operatorLTrButton.whenPressed(new WOFCW(m_wheelOfFortune));
+    m_operatorLTrButton.whenReleased(new WOFStop(m_wheelOfFortune));
+    m_operatorRTrButton.whenPressed(new WOFCCW(m_wheelOfFortune));
+    m_operatorRTrButton.whenReleased(new WOFStop(m_wheelOfFortune));
   }
 
 

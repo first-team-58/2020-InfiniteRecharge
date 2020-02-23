@@ -10,18 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Hanger;
-import frc.robot.subsystems.WheelOfFortune;
 /**
  * An example command that uses an example subsystem.
  */
-public class WOFCW extends CommandBase {
-    WheelOfFortune m_subsystem;
+public class HangerBrakeOn extends CommandBase {
+    Hanger m_subsystem;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public WOFCW(WheelOfFortune subsystem) {
+  public HangerBrakeOn(Hanger subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     //addRequirements(subsystem);
@@ -31,7 +30,7 @@ public class WOFCW extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-       m_subsystem.setMotor(Constants.wOFCW);
+       m_subsystem.setBrakeState(true);
     }
 
   // Called once the command ends or is interrupted.

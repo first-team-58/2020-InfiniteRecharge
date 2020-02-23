@@ -54,21 +54,24 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("Shooter Speed", RobotContainer.m_shooter.getLeftMotorSpeed());
-    SmartDashboard.putNumber("Shooter Speed Percent", RobotContainer.m_shooter.getLeftMotorSpeedPercent());
+   // SmartDashboard.putNumber("Shooter Speed", RobotContainer.m_shooter.getLeftMotorSpeed());
+    //SmartDashboard.putNumber("Shooter Speed Percent", RobotContainer.m_shooter.getLeftMotorSpeedPercent());
     SmartDashboard.putNumber("Left Shooter Speed", RobotContainer.m_shooter.getLeftMotorSpeed());
     SmartDashboard.putNumber("Right Shooter Speed", RobotContainer.m_shooter.getRightMotorSpeed());
-    SmartDashboard.putNumber("Left Shooter PID Error", RobotContainer.m_shooter.getLeftMotorPIDError());
-    SmartDashboard.putNumber("Right Shooter PID Error", RobotContainer.m_shooter.getRightMotorPIDError());
-    SmartDashboard.putNumber("Left Shooter Raw Speed", RobotContainer.m_shooter.getLeftRawSpeed());
-    SmartDashboard.putNumber("Right Shooter Raw Speed", RobotContainer.m_shooter.getRightRawSpeed());
+    //SmartDashboard.putNumber("Left Shooter PID Error", RobotContainer.m_shooter.getLeftMotorPIDError());
+    //SmartDashboard.putNumber("Right Shooter PID Error", RobotContainer.m_shooter.getRightMotorPIDError());
+    //SmartDashboard.putNumber("Left Shooter Raw Speed", RobotContainer.m_shooter.getLeftRawSpeed());
+    //SmartDashboard.putNumber("Right Shooter Raw Speed", RobotContainer.m_shooter.getRightRawSpeed());
     //Number[] lime = NetworkTableInstance.getDefault().getEntry("camtran")
-    SmartDashboard.putNumber("Limelight camtran x", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[0]);
-    SmartDashboard.putNumber("Limelight camtran y", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[1]);
-    SmartDashboard.putNumber("Limelight camtran z", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[2]);
-    SmartDashboard.putNumber("Navx reported Orentation", RobotContainer.m_drivetrain.getNavx().getYaw());
-    SmartDashboard.putNumber("Left Drive Train Distance", RobotContainer.m_drivetrain.getLeftDistance());
-    SmartDashboard.putNumber("Right Drive Train Distance", RobotContainer.m_drivetrain.getRightDistance());
+    //SmartDashboard.putNumber("Limelight camtran x", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[0]);
+    //SmartDashboard.putNumber("Limelight camtran y", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[1]);
+    //SmartDashboard.putNumber("Limelight camtran z", (Double) NetworkTableInstance.getDefault().getTable("limelight").getEntry("camtran").getNumberArray(new Number[] {0,0,0,0,0,0})[2]);
+    SmartDashboard.putNumber("Navx reported Orentation", RobotContainer.m_drivetrain.getNavx().getAngle());
+    //SmartDashboard.putNumber("Left Drive Train Distance", RobotContainer.m_drivetrain.getLeftDistance());
+    //SmartDashboard.putNumber("Right Drive Train Distance", RobotContainer.m_drivetrain.getRightDistance());
+    SmartDashboard.putBoolean("PID Enabled", RobotContainer.m_drivetrain.pidEnabled);
+    SmartDashboard.putBoolean("Limelight Target", Limelight.isTargetAvailable());
+    
   }
 
   /**
@@ -76,6 +79,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    Limelight.setLimelightLeds(1);
   }
 
   @Override
@@ -111,8 +115,11 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    Limelight.setLimelightLeds(0);
+    Limelight.setLimelightLeds(1);
     RobotContainer.m_drivetrain.zeroEncoders();
+    RobotContainer.m_drivetrain.pidEnabled = false;
+    RobotContainer.m_drivetrain.positionAchieved = true;
+    
   }
 
   /**

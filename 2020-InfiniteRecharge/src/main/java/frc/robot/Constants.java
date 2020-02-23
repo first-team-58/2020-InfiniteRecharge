@@ -39,7 +39,7 @@ public final class Constants {
     //public static int wheelOfFortuneSolenoid2 = 4;
     public static int hangerSolenoid1 = 3;
     public static int hangerSolenoid2 = 4;
-    public static int hangerBreak = 6;
+    public static int hangerBrake = 6;
 
     //DIO PORTS
     public static int collectorSensor = 0;
@@ -60,7 +60,7 @@ public final class Constants {
     //Hanger Constants
     public static double hangerUpSpeed = 1.0;
     public static double hangerDownSpeed = -1.0;
-    public static Value hangerReleaseState = Value.kForward;
+    public static boolean hangerArmState = true;
 
     //WheelOfFortune Constants
     public static double wOFCCW = 1.0;
@@ -82,5 +82,5 @@ public final class Constants {
     public static double shooter_speedTarget = 1; //needs to be set in units / 100ms, so 500 rpm would be 500.0 * 4960 (encoder ticks per revolution) / 600
 
     //drive Constants
-    public static boolean driveSolenoidSlow = true;
+    public static boolean driveSolenoidSlow = false;
 }

@@ -8,19 +8,22 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 
 public class Hanger extends SubsystemBase {
-  private DoubleSolenoid solenoid;
+  private Solenoid brake;
+  private Solenoid arm;
   private WPI_TalonSRX motor;
 
   /**
    * Creates a new Collector.
    */
   public Hanger() {
-    solenoid = new DoubleSolenoid(Constants.hangerSolenoid1, Constants.hangerSolenoid2);
+    brake = new Solenoid(Constants.hangerBrake);
+    arm = new Solenoid(Constants.hangerSolenoid1);
     motor = new WPI_TalonSRX(Constants.hangerMotor);
   }
 
@@ -29,8 +32,12 @@ public class Hanger extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setSolenoidState(DoubleSolenoid.Value value) {
-      solenoid.set(value);
+  public void setBrakeState(boolean state) {
+      brake.set(state);
+  }
+
+  public void setArmState(boolean state) {
+    arm.set(state);
   }
 
   public void setMotor(double speed) {

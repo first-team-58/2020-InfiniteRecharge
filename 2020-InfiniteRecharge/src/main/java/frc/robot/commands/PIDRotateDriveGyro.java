@@ -36,8 +36,9 @@ public class PIDRotateDriveGyro extends CommandBase {
   @Override
   public void initialize() {
       m_subsystem.positionAchieved = false;
-      m_subsystem.getNavx().setAngleAdjustment(180.0 - m_subsystem.getNavx().getAngle());
-      m_subsystem.rotationSetpoint =  180 + rotate;
+      //m_subsystem.getNavx().setAngleAdjustment(180.0 - m_subsystem.getNavx().getAngle());
+      m_subsystem.rotationSetpoint =  m_subsystem.getNavx().getAngle() + rotate;
+      System.out.println("rotationSetpoint: " + m_subsystem.rotationSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
