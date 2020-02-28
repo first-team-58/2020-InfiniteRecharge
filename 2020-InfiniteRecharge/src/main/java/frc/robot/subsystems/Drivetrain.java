@@ -190,20 +190,20 @@ private void PIDRotation() {
 		double derivative = (error - this.previous_error) / .02;
 		//this.rcw = Pr * error + Ir * this.integral + Dr * derivative;
     
-    double new_rcw = P * error + I * this.integral + D * derivative;
+    double new_rcw = Constants.driveRotationalP * error + Constants.driveRotationalI * this.integral + Constants.driveRotationalD * derivative;
     rcw_prev = rcw;
-    if(new_rcw > (rcw + .02)) {
-      rcw = rcw + .02;
-    } else if (new_rcw < (rcw - .02)) {
-      rcw = rcw -.02;
+    if(new_rcw > (rcw + Constants.driveRotationalChangeLimit)) {
+      rcw = rcw + Constants.driveRotationalChangeLimit;
+    } else if (new_rcw < (rcw - Constants.driveRotationalChangeLimit)) {
+      rcw = rcw - Constants.driveRotationalChangeLimit;
     } else {
       this.rcw = new_rcw;
     }
   
-    if(rcw > .4) {
-      rcw = .4;
-    } else if (rcw < -.4) {
-      rcw = -.4;
+    if(rcw > Constants.driveRotationalLimit) {
+      rcw = Constants.driveRotationalLimit;
+    } else if (rcw < - 1.0 *Constants.driveRotationalLimit) {
+      rcw = -1.0 * Constants.driveRotationalLimit;
     }
 
     SmartDashboard.putNumber("PIDPosition error", error);
@@ -213,9 +213,9 @@ private void PIDRotation() {
     SmartDashboard.putNumber("PIDPosition out", rcw);
     SmartDashboard.putNumber("PIDPosition target", rotationSetpoint);
     
-    if(Math.abs(error) < 1 && Math.abs(previous_error) < 1) {
+    if(Math.abs(error) < Constants.driveRotationalDeadzone && Math.abs(previous_error) < Constants.driveRotationalDeadzone) {
       pidRotCnt++;
-      if(pidRotCnt > 100) {
+      if(pidRotCnt > Constants.driveRotationalCountsToFinish) {
         positionAchieved = true;
         pidEnabled = false;
         Limelight.setLimelightLeds(1);
@@ -236,25 +236,29 @@ private void PIDPosition() {
     this.integral += (error * .02);
   //}
   double derivative = (error - this.previous_error) / .02;
-  double new_ppsd = P * error + I * this.integral + D * derivative;
+  double new_pspd = Constants.drivePositionalP * error + Constants.drivePositionalI * this.integral + Constants.drivePositionalD * derivative;
   pspd_prev = pspd;
-  if(new_ppsd > (pspd + .05)) {
-    pspd = pspd + .05;
+  if(new_pspd > (pspd + Constants.drivePositionalChangeLimit)) {
+    pspd = pspd + Constants.drivePositionalChangeLimit;
+  } else if (new_pspd < (pspd - Constants.drivePositionalChangeLimit)) {
+    pspd = pspd - Constants.drivePositionalChangeLimit;
   } else {
-    this.pspd = new_ppsd;
+    this.pspd = new_pspd;
   }
 
-  if(pspd > .5) {
-    pspd = .5;
+  if(pspd > Constants.drivePositionalLimit) {
+    pspd = Constants.drivePositionalLimit;
+  } else if (pspd < (-1.0 * Constants.drivePositionalLimit)) {
+    pspd = ( -1.0 * Constants.drivePositionalLimit);
   }
   
   SmartDashboard.putNumber("PIDPosition error", error);
   SmartDashboard.putNumber("PIDPosition integral", integral);
   SmartDashboard.putNumber("PIDPosition der", derivative);
   SmartDashboard.putNumber("PIDPosition pos", ((getRightDistance() + getLeftDistance())/2));
-  if(error < .5 && previous_error < .5) {
+  if(error < Constants.drivePositionalDeadzone && previous_error < Constants.drivePositionalDeadzone) {
     pidPosCnt++;
-    if(pidPosCnt > 100) {
+    if(pidPosCnt > Constants.drivePositionalCountsToFinish) {
       positionAchieved = true;
       pidEnabled = false;
       pspd = 0;

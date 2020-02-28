@@ -83,4 +83,20 @@ public final class Constants {
 
     //drive Constants
     public static boolean driveSolenoidSlow = false;
+
+    public static double drivePositionalP = 0.06;
+    public static double drivePositionalI = 0.01;
+    public static double drivePositionalD = 0.0;
+    public static double drivePositionalChangeLimit = 0.05;
+    public static double drivePositionalLimit = .5;
+    public static int drivePositionalCountsToFinish = 100;
+    public static double drivePositionalDeadzone = .5; //inches
+
+    public static double driveRotationalP = 0.01;
+    public static double driveRotationalI = 0.004;
+    public static double driveRotationalD = 0.0;
+    public static double driveRotationalChangeLimit = 0.02;
+    public static double driveRotationalLimit = 0.4;
+    public static int driveRotationalCountsToFinish = 100;
+    public static double driveRotationalDeadzone = 1.0;  //degrees
 }
