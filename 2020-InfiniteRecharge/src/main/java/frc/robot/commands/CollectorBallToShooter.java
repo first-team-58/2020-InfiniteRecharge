@@ -55,11 +55,11 @@ public class CollectorBallToShooter extends CommandBase {
 
       if(!indexer.getIndexerBottomBool()) {
           //run both up to shooter
-          indexer.setMotor( -1.0 * Constants.collectorInSpeed);
+          indexer.setMotor( -1.0 * Constants.indexerInSpeed);
       } else {
           //run top in, and bottom out
-          indexer.setTopMotor( -1.0 * Constants.collectorInSpeed);
-          indexer.setBottomMotor(1.0 * Constants.collectorInSpeed);
+          indexer.setTopMotor( -1.0 * Constants.indexerInSpeed);
+          indexer.setBottomMotor(1.0 * Constants.indexerInSpeed);
       }
 
     }
