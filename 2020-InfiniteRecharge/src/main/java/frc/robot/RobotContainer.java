@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.*;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -98,8 +99,8 @@ public class RobotContainer {
     //m_driverAButton.whenReleased(new CollectorRetract(m_collector));
     m_driverRBButton.whileHeld(new ShooterSpin(m_shooter));
     m_driverRBButton.whenReleased(new ShooterStop(m_shooter));
-    m_driverLBButton.whenPressed(new HangerBrakeOn(m_hanger));
-    m_driverLBButton.whenReleased(new HangerBrakeOff(m_hanger));
+    //m_driverLBButton.whenPressed(new HangerBrakeOn(m_hanger));
+    //m_driverLBButton.whenReleased(new HangerBrakeOff(m_hanger));
     //m_driverBButton.whenPressed(new ConditionalCommand(new IndexerIn(m_indexer), new IndexerStop(m_indexer), m_indexer.getIndexerLast()::get));
     m_driverBButton.whenPressed(new IndexerBallToShooter(m_indexer));
     m_driverBButton.whenReleased(new IndexerStop(m_indexer));
@@ -125,6 +126,11 @@ public class RobotContainer {
     m_operatorLTrButton.whenReleased(new WOFStop(m_wheelOfFortune));
     m_operatorRTrButton.whenPressed(new WOFCCW(m_wheelOfFortune));
     m_operatorRTrButton.whenReleased(new WOFStop(m_wheelOfFortune));
+    m_operatorSeButton.whenPressed(new HangerBrakeOff(m_hanger));
+    m_operatorBButton.whenPressed(new HangerBrakeOn(m_hanger));
+    m_operatorYButton.whenPressed(new SequentialCommandGroup(new CollectorDown(m_collector), new HangerRelease(m_hanger), new HangerDown(m_hanger), new WaitCommand(Constants.hangerUnspoolTime), new HangerStop(m_hanger)));
+    m_operatorXButton.whenPressed(new ParallelCommandGroup(new HangerRetract(m_hanger), new HangerUp(m_hanger)));
+    m_operatorXButton.whenReleased(new HangerStop(m_hanger));
   }
 
 
