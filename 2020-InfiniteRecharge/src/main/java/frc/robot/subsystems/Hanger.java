@@ -41,7 +41,7 @@ public class Hanger extends SubsystemBase {
   }
 
   public void setMotor(double speed) {
-    motor.set(speed);
+    motor.set(speed);// (speed)
   }
 
 }

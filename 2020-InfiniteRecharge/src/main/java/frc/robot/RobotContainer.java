@@ -122,7 +122,6 @@ public class RobotContainer {
 
     m_operatorAButton.whenPressed(new WOFDeploy(m_wheelOfFortune));
     m_operatorAButton.whenReleased(new WOFRetract(m_wheelOfFortune));
-   
     m_operatorLTrButton.whenPressed(new WOFCW(m_wheelOfFortune));
     m_operatorLTrButton.whenReleased(new WOFStop(m_wheelOfFortune));
     m_operatorRTrButton.whenPressed(new WOFCCW(m_wheelOfFortune));
