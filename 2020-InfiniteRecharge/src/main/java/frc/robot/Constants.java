@@ -47,14 +47,14 @@ public final class Constants {
     public static int indexerTopSensor = 2;
 
     //Collector Constants
-    public static double collectorInSpeed = 0.6;
+    public static double collectorInSpeed = 0.8;//Was 0.6
     public static double collectorOutSpeed = -1.0;
     public static Value collectorUpPosition = Value.kOff;
     public static Value collectorDownPosition = Value.kReverse;
     public static Value collectorOffPosition = Value.kForward;
 
     //indexer Constants
-    public static double indexerInSpeed = -0.3 ;
+    public static double indexerInSpeed = -0.8 ;//Was -0.3
     public static double indexerOutSpeed = 0.3;
 
     //Hanger Constants
@@ -70,12 +70,12 @@ public final class Constants {
     public static Value wOFRetractedState = Value.kReverse;
 
     //shooter Constants
-    public static double shooterL_kF = 2.6*(4096.0/409600.0); //.27
+    public static double shooterL_kF = 4.1*(4096.0/409600.0); //.27
     public static double shooterL_kP = 0.012;
     public static double shooterL_kI = 0.002;
     public static double shooterL_kD = 0;//2;
 
-    public static double shooterR_kF = 2.7*(4096.0/409600.0);//1023.0/7200.0; //1023.0 / 7200.0;
+    public static double shooterR_kF = 4*(4096.0/409600.0);//(2.7)  1023.0/7200.0; //1023.0 / 7200.0;
     public static double shooterR_kP = 0.012; //.025;
     public static double shooterR_kI = 0.002; //.0001;
     public static double shooterR_kD = 0;//2; //2;
