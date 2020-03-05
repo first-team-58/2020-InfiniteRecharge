@@ -36,6 +36,7 @@ public final class Constants {
     public static int collectorSolenoid1 = 1;
     public static int collectorSolenoid2 = 2;
     public static int wheelOfFortuneSolenoid1 = 5;
+    
     //public static int wheelOfFortuneSolenoid2 = 4;
     public static int hangerSolenoid1 = 3;
     public static int hangerSolenoid2 = 4;
@@ -61,7 +62,7 @@ public final class Constants {
     public static double hangerUpSpeed = 1.0;
     public static double hangerDownSpeed = -1.0;
     public static boolean hangerArmState = true;
-    public static double hangerUnspoolTime = 2.0; //seconds
+    public static double hangerUnspoolTime = .1; //seconds
 
     //WheelOfFortune Constants
     public static double wOFCCW = 1.0;
