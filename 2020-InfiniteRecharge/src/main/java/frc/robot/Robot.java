@@ -58,6 +58,8 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putNumber("Shooter Speed Percent", RobotContainer.m_shooter.getLeftMotorSpeedPercent());
     SmartDashboard.putNumber("Left Shooter Speed", RobotContainer.m_shooter.getLeftMotorSpeed());
     SmartDashboard.putNumber("Right Shooter Speed", RobotContainer.m_shooter.getRightMotorSpeed());
+    SmartDashboard.putNumber("Hanger Velocity Value", RobotContainer.m_hanger.getHangerVelocity());
+    SmartDashboard.putNumber("Hanger Encoder Value", RobotContainer.m_hanger.getHangerPosition());
     //SmartDashboard.putNumber("Left Shooter PID Error", RobotContainer.m_shooter.getLeftMotorPIDError());
     //SmartDashboard.putNumber("Right Shooter PID Error", RobotContainer.m_shooter.getRightMotorPIDError());
     //SmartDashboard.putNumber("Left Shooter Raw Speed", RobotContainer.m_shooter.getLeftRawSpeed());
