@@ -19,6 +19,7 @@ public class Hanger extends SubsystemBase {
   private final Solenoid brake;
   private final Solenoid arm;
   private final WPI_TalonSRX motor;
+  private final DigitalInput hangerDownSensor;
 
   /**
    * Creates a new Collector.
@@ -59,6 +60,10 @@ public class Hanger extends SubsystemBase {
 
   public WPI_TalonSRX getMotorControllerTalonSRX(){
     return motor;
+  }
+
+  public DigitalInput getHangerDownSensor() {
+    return hangerDownSensor;
   }
 
 }
