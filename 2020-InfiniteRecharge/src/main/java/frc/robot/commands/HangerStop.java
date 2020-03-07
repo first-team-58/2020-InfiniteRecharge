@@ -40,13 +40,13 @@ public class HangerStop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  //   
-  //  if (done () < 5000) { 
-  //  		return false; // too soon
-  //  	} else {
-  //  		return true;//
-  //  	}
+     
+    if (m_subsystem.motor() < 5000) { //motor.getSelectedSensorPosition
+    		return false; // 
+    	} else {
+    		return true;//
+    	}
 
-    return true;
+  //  return true;
   }
 }

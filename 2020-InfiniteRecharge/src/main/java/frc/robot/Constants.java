@@ -63,6 +63,7 @@ public final class Constants {
     public static double hangerDownSpeed = -1;//-1
     public static boolean hangerArmState = true;
     public static double hangerUnspoolTime = 1; //seconds
+    public static double hangerAtTop = 5000;
 
     //WheelOfFortune Constants
     public static double wOFCCW = 1.0;
