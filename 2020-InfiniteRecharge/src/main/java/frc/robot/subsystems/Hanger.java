@@ -55,4 +55,8 @@ public class Hanger extends SubsystemBase {
     return ((motor.getSelectedSensorPosition()));
   }
 
+  public WPI_TalonSRX getMotorControllerTalonSRX(){
+    return motor;
+  }
+
 }
