@@ -19,27 +19,34 @@ public class HangerStop extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public HangerStop(Hanger subsystem) {
+  public HangerStop(final Hanger subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    //addRequirements(subsystem);
-    
+    // addRequirements(subsystem);
+
   }
 
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-       m_subsystem.setMotor(0);
-    }
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    m_subsystem.setMotor(0);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+  //   
+  //  if (done () < 5000) { 
+  //  		return false; // too soon
+  //  	} else {
+  //  		return true;//
+  //  	}
+
     return true;
   }
 }
