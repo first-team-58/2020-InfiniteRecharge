@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Hanger extends SubsystemBase {
   private final Solenoid brake;
@@ -28,6 +29,7 @@ public class Hanger extends SubsystemBase {
     motor = new WPI_TalonSRX(Constants.hangerMotor);
     // Another feeble attempt. This time to add encoder for hanger functions
     motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    hangerDownSensor = new DigitalInput(Constants.hangerDownSensor);
   }
 
   @Override

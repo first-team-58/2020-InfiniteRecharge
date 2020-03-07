@@ -43,7 +43,7 @@ public class HangerHigh extends CommandBase {
   @Override
   public boolean isFinished() {
      
-    if (m_subsystem.motor() < 5000) { //motor.getSelectedSensorPosition
+    if (m_subsystem.getMotorControllerTalonSRX().getSelectedSensorPosition() < Constants.hangerAtTop ) { //motor.getSelectedSensorPosition
     		return false; // 
     	} else {
     		return true;//

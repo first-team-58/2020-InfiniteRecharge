@@ -46,6 +46,7 @@ public final class Constants {
     public static int collectorSensor = 0;
     public static int indexerBottomSensor = 1;
     public static int indexerTopSensor = 2;
+    public static int hangerDownSensor = 3;
 
     //Collector Constants
     public static double collectorInSpeed = 0.8;//Was 0.6
@@ -59,11 +60,11 @@ public final class Constants {
     public static double indexerOutSpeed = 0.3;
 
     //Hanger Constants
-    public static double hangerUpSpeed = 1;//1
-    public static double hangerDownSpeed = -1;//-1
+    public static double hangerUpSpeed = .25;//1
+    public static double hangerDownSpeed = -.25;//-1
     public static boolean hangerArmState = true;
     public static double hangerUnspoolTime = 1; //seconds
-    public static double hangerAtTop = 5000;
+    public static double hangerAtTop = 50000;
 
     //WheelOfFortune Constants
     public static double wOFCCW = 1.0;

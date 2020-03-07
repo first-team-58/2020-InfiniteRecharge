@@ -128,8 +128,8 @@ public class RobotContainer {
     m_operatorRTrButton.whenReleased(new WOFStop(m_wheelOfFortune));
     m_operatorSeButton.whenPressed(new HangerBrakeOff(m_hanger));
     m_operatorBButton.whenPressed(new HangerBrakeOn(m_hanger));
-    m_operatorYButton.whenPressed(new SequentialCommandGroup(new CollectorDown(m_collector), new HangerRelease(m_hanger), new HangerBrakeOff(m_hanger), new HangerDown(m_hanger), new WaitCommand(Constants.hangerUnspoolTime), new HangerStop(m_hanger)));
-    m_operatorXButton.whenPressed(new ParallelCommandGroup(new HangerRetract(m_hanger), new HangerUp(m_hanger)));
+    m_operatorYButton.whenPressed(new SequentialCommandGroup(new CollectorDown(m_collector), new HangerRelease(m_hanger), new HangerBrakeOff(m_hanger), new HangerHigh(m_hanger) , new HangerStop(m_hanger)));//new HangerDown(m_hanger), new WaitCommand(Constants.hangerUnspoolTime)
+    m_operatorXButton.whenPressed(new ParallelCommandGroup(new HangerRetract(m_hanger), new HangerDown(m_hanger)));
     m_operatorXButton.whenReleased(new HangerStop(m_hanger));
     //my feeble attempt at gettin gbuttons to work
     m_operatorLBButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerDown(m_hanger)));
