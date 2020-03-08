@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.Hanger;
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -137,8 +139,11 @@ public class RobotContainer {
     m_operatorRBButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerUp(m_hanger)));
     m_operatorRBButton.whenReleased(new SequentialCommandGroup(new HangerStop(m_hanger), new HangerBrakeOn(m_hanger)));
   }
-
- 
+//
+//
+public void periodic(){
+  new HangerReset(m_hanger);
+}
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
