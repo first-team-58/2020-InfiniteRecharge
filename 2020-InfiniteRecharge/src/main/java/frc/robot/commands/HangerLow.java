@@ -30,7 +30,7 @@ public class HangerLow extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.setMotor(Constants.hangerUpSpeed);
+    m_subsystem.setMotor(Constants.hangerDownSpeedSecondStage);
   }
 
   // Called once the command ends or is interrupted.
@@ -43,10 +43,11 @@ public class HangerLow extends CommandBase {
   @Override
   public boolean isFinished() {
      
-    if (m_subsystem.getHangerDownSensor() = false) { //motor.getSelectedSensorPosition
+    if (m_subsystem.getHangerDownSensor().get() == true) { 
     		return false; // 
     	} else {
-    		return true;//
+        m_subsystem.getMotorControllerTalonSRX().setSelectedSensorPosition(0);
+        return true;//
     	}
 
     //return true;

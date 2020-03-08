@@ -128,9 +128,9 @@ public class RobotContainer {
     m_operatorRTrButton.whenReleased(new WOFStop(m_wheelOfFortune));
     m_operatorSeButton.whenPressed(new HangerBrakeOff(m_hanger));
     m_operatorBButton.whenPressed(new HangerBrakeOn(m_hanger));
-    m_operatorYButton.whenPressed(new SequentialCommandGroup(new CollectorDown(m_collector), new HangerRelease(m_hanger), new HangerBrakeOff(m_hanger), new HangerHigh(m_hanger) , new HangerStop(m_hanger)));//new HangerDown(m_hanger), new WaitCommand(Constants.hangerUnspoolTime)
-    m_operatorXButton.whenPressed(new ParallelCommandGroup(new HangerRetract(m_hanger), new HangerDown(m_hanger)));
-    m_operatorXButton.whenReleased(new HangerStop(m_hanger));
+    m_operatorYButton.whenPressed(new SequentialCommandGroup(new CollectorDown(m_collector), new HangerRelease(m_hanger), new HangerBrakeOff(m_hanger), new HangerHigh(m_hanger) , new HangerStop(m_hanger)));
+    m_operatorXButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerLowFirstStage(m_hanger), new ParallelCommandGroup(new HangerRetract(m_hanger), new HangerLow(m_hanger)), new HangerBrakeOn(m_hanger)));
+    //m_operatorXButton.whenReleased(new HangerStop(m_hanger));
     //my feeble attempt at gettin gbuttons to work
     m_operatorLBButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerDown(m_hanger)));
     m_operatorLBButton.whenReleased(new SequentialCommandGroup(new HangerStop(m_hanger), new HangerBrakeOn(m_hanger)));
@@ -138,7 +138,7 @@ public class RobotContainer {
     m_operatorRBButton.whenReleased(new SequentialCommandGroup(new HangerStop(m_hanger), new HangerBrakeOn(m_hanger)));
   }
 
-
+ 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

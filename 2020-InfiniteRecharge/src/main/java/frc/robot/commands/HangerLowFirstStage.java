@@ -13,14 +13,14 @@ import frc.robot.subsystems.Hanger;
 /**
  * An example command that uses an example subsystem.
  */
-public class HangerHigh extends CommandBase {
+public class HangerLowFirstStage extends CommandBase {
     Hanger m_subsystem;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public HangerHigh(final Hanger subsystem) {
+  public HangerLowFirstStage(final Hanger subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     // addRequirements(subsystem);
@@ -30,7 +30,7 @@ public class HangerHigh extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.setMotor(Constants.hangerUpSpeed);
+    m_subsystem.setMotor(Constants.hangerDownSpeed);
   }
 
   // Called once the command ends or is interrupted.
@@ -43,10 +43,11 @@ public class HangerHigh extends CommandBase {
   @Override
   public boolean isFinished() {
      
-    if (m_subsystem.getMotorControllerTalonSRX().getSelectedSensorPosition() < Constants.hangerAtTop ) { //motor.getSelectedSensorPosition
+    if (m_subsystem.getMotorControllerTalonSRX().getSelectedSensorPosition() > Constants.hangerRetractStart) { //motor.getSelectedSensorPosition
     		return false; // 
     	} else {
-    		return true;//
+        //m_subsystem.getMotorControllerTalonSRX().setSelectedSensorPosition(0);
+        return true;//
     	}
 
     //return true;
