@@ -60,12 +60,12 @@ public final class Constants {
     public static double indexerOutSpeed = 0.3;
 
     //Hanger Constants
-    public static double hangerUpSpeed = -.25;//1
+    public static double hangerUpSpeed = -.4;//1
     public static double hangerDownSpeed = .75;//-1
     public static double hangerDownSpeedSecondStage = 1;
     public static boolean hangerArmState = true;
     public static double hangerUnspoolTime = 1; //seconds
-    public static double hangerAtTop = 15000;
+    public static double hangerAtTop = 82058;
     public static double hangerAtBottom = 0;
     public static double hangerRetractStart = 10000;//run drums down to this point then retract piston
 

@@ -33,10 +33,8 @@ public class HangerReset extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Constants.hangerDownSensor == 1) {
-      m_subsystem.getMotorControllerTalonSRX().setSelectedSensorPosition(0);
-     System.out.print("Encoder");
-    }  
+          m_subsystem.getMotorControllerTalonSRX().setSelectedSensorPosition(0);
+     //System.out.println("Encoder");
   }
 
   // Called once the command ends or is interrupted.

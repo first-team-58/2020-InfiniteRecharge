@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -14,6 +15,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -131,7 +133,8 @@ public class RobotContainer {
     m_operatorSeButton.whenPressed(new HangerBrakeOff(m_hanger));
     m_operatorBButton.whenPressed(new HangerBrakeOn(m_hanger));
     m_operatorYButton.whenPressed(new SequentialCommandGroup(new CollectorDown(m_collector), new HangerRelease(m_hanger), new HangerBrakeOff(m_hanger), new HangerHigh(m_hanger) , new HangerStop(m_hanger)));
-    m_operatorXButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerLowFirstStage(m_hanger), new ParallelCommandGroup(new HangerRetract(m_hanger), new HangerLow(m_hanger)), new HangerBrakeOn(m_hanger)));
+    //m_operatorXButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerLowFirstStage(m_hanger), new ParallelCommandGroup(new HangerRetract(m_hanger), new HangerLow(m_hanger)), new HangerBrakeOn(m_hanger)));
+    m_operatorStButton.whenPressed(new HangerReset(m_hanger));
     //m_operatorXButton.whenReleased(new HangerStop(m_hanger));
     //my feeble attempt at gettin gbuttons to work
     m_operatorLBButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerDown(m_hanger)));
@@ -139,11 +142,13 @@ public class RobotContainer {
     m_operatorRBButton.whenPressed(new SequentialCommandGroup(new HangerBrakeOff(m_hanger), new HangerUp(m_hanger)));
     m_operatorRBButton.whenReleased(new SequentialCommandGroup(new HangerStop(m_hanger), new HangerBrakeOn(m_hanger)));
   }
+
+
 //
 //
-public void periodic(){
-  new HangerReset(m_hanger);
-}
+//public void periodic(){
+//  runCommand (new HangerReset(m_hanger));
+//}
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
