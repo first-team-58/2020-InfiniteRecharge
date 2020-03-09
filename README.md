@@ -6,3 +6,7 @@ Things tp Do
 1.  Cancel Limelight targeting (can't turn once limelight activates).
 2.  Slow turning speed down (drive train).
 3.  Auto-zero the arm.
+4.  Tune shooter wheel speed vs distance
+5.  Tune limelight targeting
+6.  Tune indexer ball handling
+7.  
