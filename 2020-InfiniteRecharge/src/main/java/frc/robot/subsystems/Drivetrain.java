@@ -54,6 +54,11 @@ public class Drivetrain extends SubsystemBase {
     driveTrainLeftFront = new WPI_TalonFX(Constants.driveTrainLeftFront);
     driveTrainLeftRear = new WPI_TalonFX(Constants.driveTrainLeftRear);
 
+    driveTrainLeftFront.configOpenloopRamp(2);
+    driveTrainLeftRear.configOpenloopRamp(2);
+    driveTrainRightFront.configOpenloopRamp(2);
+    driveTrainRightRear.configOpenloopRamp(2);
+
     driveSolenoid = new Solenoid(Constants.driveTrainSolenoid);
 
     // driveTrainRightRear.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);

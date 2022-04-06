@@ -37,8 +37,8 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      double moveValue = RobotContainer.m_driverController.getRawAxis(1);
-      double rotateValue = RobotContainer.m_driverController.getRawAxis(4);
+      double moveValue = RobotContainer.m_driverController.getRawAxis(1) *.5;
+      double rotateValue = RobotContainer.m_driverController.getRawAxis(4) *.5;
 
       if(Math.abs(moveValue) < .2) {
           moveValue = 0;
