@@ -81,7 +81,8 @@ public class Limelight {
 
     private double getLimelightX() {
         updateLimelightValues();
-        return getCorrection(tx.getDouble(0));
+       // return getCorrection(tx.getDouble(0));
+       return tx.getDouble(0);
     }
 
     private double getLimelightY() {

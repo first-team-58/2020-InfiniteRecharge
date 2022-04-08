@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.*;
+import frc.robot.sensors.Limelight;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -42,6 +43,8 @@ public class RobotContainer {
   public static final Shooter m_shooter = new Shooter();
 
   public static final WheelOfFortune m_wheelOfFortune = new WheelOfFortune();
+
+  public static final Limelight m_limelight = new Limelight("limelight", 0, 0);
 
   // Robots commands are defined here
   public final Drive m_drive = new Drive(m_drivetrain);
@@ -164,5 +167,9 @@ public class RobotContainer {
 
   public Command getDriveCommand() {
     return m_drive;
+  }
+
+  public Limelight getLimelight() {
+    return m_limelight;
   }
 }
