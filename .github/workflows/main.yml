@@ -24,9 +24,15 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    
+    - name: print working directory
+      run: pwd
+      
+    - name: list directory contents
+      run: ls -la
 
     - name: change directory
-      run: cd 2020-InfiniteRecharge/2020-InfiniteRecharge
+      run: cd 2020-InfiniteRecharge/
       
     - name: print working directory
       run: pwd
