@@ -30,6 +30,9 @@ jobs:
       
     - name: print working directory
       run: pwd
+      
+    - name: list directory contents
+      run: ls -la
 
     # Grant execute permission for gradlew
     - name: Grant execute permission for gradlew
