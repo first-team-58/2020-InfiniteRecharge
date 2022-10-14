@@ -25,20 +25,8 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     
-    - name: print working directory
-      run: pwd
-      
-    - name: list directory contents
-      run: ls -la
-
-    - name: change directory
-      run: cd 2020-InfiniteRecharge/
-      
-    - name: print working directory
-      run: pwd
-      
-    - name: list directory contents
-      run: ls -la
+    - name: set working directory
+      working-directory: ./2020-InfiniteRechard
 
     # Grant execute permission for gradlew
     - name: Grant execute permission for gradlew
