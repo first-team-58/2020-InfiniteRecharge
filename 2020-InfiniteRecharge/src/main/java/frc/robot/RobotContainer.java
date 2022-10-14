@@ -125,7 +125,7 @@ public class RobotContainer {
     //m_driverYButton.whenPressed(new SequentialCommandGroup(new EnableLimelight(), new WaitCommand(1), new PIDRotateDrive(m_drivetrain)));
     m_driverLTrButton.whenPressed(new ReverseCollector(m_collector));
     m_driverLTrButton.whenReleased(new CollectorRetract(m_collector));
-    m_driverLBButton.whenPressed(new SeekNTarget(m_limelight));
+    m_driverLBButton.whenPressed(new SeekNTarget(m_drivetrain));
 
     //m_operatorAButton.whenPressed(new WOFDeploy(m_wheelOfFortune));
     m_operatorAButton.whenReleased(new WOFRetract(m_wheelOfFortune));
