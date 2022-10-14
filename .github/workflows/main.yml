@@ -27,6 +27,9 @@ jobs:
 
     - name: change directory
       run: cd 2020-InfiniteRecharge
+      
+    - name: print working directory
+     run: pwd
 
     # Grant execute permission for gradlew
     - name: Grant execute permission for gradlew
